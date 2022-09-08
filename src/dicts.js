@@ -1,0 +1,46 @@
+import { nanoid } from 'nanoid';
+
+
+function createSourceObj({name, url, desc, lang='en', searchField=null}){
+    return {
+        id: nanoid(),
+        name,
+        lang,
+        desc,
+        url,
+        searchField,
+    }
+}
+
+const sourceObjAr=[
+    {
+        name: 'urban dictionary',
+        url: 'https://www.urbandictionary.com/',
+        desc: "Urban Dictionary is a crowdsourced online dictionary for slang words and phrases, operating under the motto 'Define Your World'. For accessing information from Urban Dictionary the web page is using <a href='https://pub.dev/packages/urbandictionary/license' target='_blank' rel='noreferrer noopener'>unofficial API</a>"
+    },
+    {
+        name:'Merriam-Webster',
+        url:'https://www.merriam-webster.com/',
+        desc:'Merriam-Webster is the oldest (over 180 years!) dictionary publisher in the United States.'  
+    },
+    {
+        name:'English-language Wiktionary',
+        url: 'https://en.wiktionary.org/wiki/Wiktionary:Main_Page',
+        desc: 'Wiktionary is a multilingual, web-based project to create a free content dictionary of terms in all natural languages and in a number of artificial languages.'
+    },
+    {
+        name:'WordNet',
+        url:'https://wordnet.princeton.edu/',
+        desc: 'WordNet is a lexical database of semantic relations between words in more than 200 languages. WordNet links words into semantic relations including synonyms, hyponyms, and meronyms. The synonyms are grouped into synsets with short definitions and usage examples.'
+    },
+    {
+        name:'OneLook Dictionary Search',
+        url:'https://www.onelook.com/',
+        desc: 'The site works like search engine for English words and phrases. More than 19 million words in more than 1000 online dictionaries are indexed by the OneLook® search engine. OneLook.com can help you define words and find words '
+    }
+];
+
+export const sourcesAr = sourceObjAr.map(obj=>createSourceObj(obj));
+
+
+
