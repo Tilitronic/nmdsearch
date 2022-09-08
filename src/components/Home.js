@@ -43,10 +43,7 @@ export function Home(){
         <div>
           <SearchField setUrbanDef={updateUrbanState}/>
           <div id='loginAndProfileWrapper'>
-          {!user ?         
-          <Togglable turnOn='login' turnOff2='cancle'>
-            <LoginAndProfile/>
-          </Togglable> : <LoginAndProfile/>}
+          <LoginAndProfile/>
           </div>
           
           <ShowUrbanDictDef data={urbanDef}/>

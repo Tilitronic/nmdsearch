@@ -3,8 +3,10 @@ import loginService from '../services/login.js';
 import { useDispatch } from 'react-redux';
 import { update, remove } from '../features/user/userSlice.js'
 import { TextField, Button } from '@mui/material';
+import Modal from './Modal/Modal.js';
 
 export function Login (props){
+    const [isOpen, setIsOpen] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     // const [user, setUser] = useState(null);
@@ -36,29 +38,38 @@ export function Login (props){
 
     
     return(
-        <form onSubmit={handleLogin}>
-        <div id='loginWrapper'>
-            <div id='usernameWrapper'>
-                <TextField 
-                type="text"
-                value={username}
-                label="username"
-                name="Username"
-                onChange={handleUsernameChange}
-                />
+        <div id='modalLogin'>
+                <Button variant="contained" color="primary" onClick={() => setIsOpen(true)}>
+                Login
+                </Button>
+
+                <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+                <form onSubmit={handleLogin}>
+                    <div id='loginWrapper'>
+                        <div id='usernameWrapper'>
+                            <TextField 
+                            type="text"
+                            value={username}
+                            label="username"
+                            name="Username"
+                            onChange={handleUsernameChange}
+                            />
+                        </div>
+                        <div id='passwordWrapper'>
+                            <TextField 
+                            type="password"
+                            label="password"
+                            value={password}
+                            name="Password"
+                            onChange={({ target }) => setPassword(target.value)}
+                            />
+                        </div>
+                    </div>
+                    <Button variant="contained" color="primary" type="submit">login</Button>
+                </form>
+                </Modal>
             </div>
-            <div id='passwordWrapper'>
-                <TextField 
-                type="password"
-                label="password"
-                value={password}
-                name="Password"
-                onChange={({ target }) => setPassword(target.value)}
-                />
-            </div>
-        </div>
-            <Button variant="contained" color="primary" type="submit">login</Button>
-        </form>
+        
     )
 
 }

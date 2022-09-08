@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { update, remove} from '../features/user/userSlice.js';
 import {Profile} from './Profile.js';
 
-
 function Logout (){
     const user = useSelector((state) => state.user.user)
     const dispatch = useDispatch()
@@ -27,10 +26,7 @@ export function LoginAndProfile () {
             <div id='login-logout'>
                 {!user ? <Login/> : <Logout/>}
             </div>
-            {user &&
-            
-                <Profile/>
-            }
+            {user &&<Profile/>}
         </div>
     )
 }

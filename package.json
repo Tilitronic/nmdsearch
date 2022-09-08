@@ -2,10 +2,10 @@
   "name": "mdsearch",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.4",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/user-event": "^13.5.0",

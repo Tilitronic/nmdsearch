@@ -5,7 +5,8 @@ import { useDispatch } from 'react-redux';
 import { update, remove } from '../features/query/querySlice.js'
 import { useSelector } from 'react-redux';
 
-
+import { TextField, Button, Input, InputLabel, InputAdornment, FormControl, Box  } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search.js';
 
 export function SearchField (props){
     const dispatch = useDispatch()
@@ -14,6 +15,7 @@ export function SearchField (props){
     const searchField = useRef();
 
     useEffect(()=>{
+        console.log("searchField", searchField);
         searchField.current.focus()
     })
 
@@ -54,8 +56,25 @@ export function SearchField (props){
 
     return(
         <div>
-            <input ref={searchField} id='searchField' value={word} onChange={handleWordChange} onKeyPress={handleKeyPress}></input>
-            <button id='searchButton' onClick={callSearch}>go</button>
+
+            <TextField 
+            size='small' 
+            inputRef={searchField}
+            type="text" 
+            id='searchField' 
+            value={word} 
+            label='search'
+            onChange={handleWordChange} 
+            onKeyPress={handleKeyPress}
+            InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+              />
+            <Button variant="contained" color="primary" id='searchButton' onClick={callSearch}>go</Button>
         </div>
     )
 }
