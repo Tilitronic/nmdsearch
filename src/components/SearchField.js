@@ -1,21 +1,26 @@
 import { useState, useRef, useEffect } from 'react';
-import {getUrbanDictDef} from './getUrbanDictDef.js';
+import {getUrbanDictDef} from '../services/urbanDict.js';
 import {saveWordToDB} from '../services/dbServices.js';
 import { useDispatch } from 'react-redux';
 import { update, remove } from '../features/query/querySlice.js'
 import { useSelector } from 'react-redux';
+import { updateDict } from '../features/sources/dictsSlice.js';
+import store from '../store.js';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { TextField, Button, Input, InputLabel, InputAdornment, FormControl, Box  } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search.js';
 
 export function SearchField (props){
     const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const location=useLocation();
     const query = useSelector((state)=>state.query.query); 
     const [word, setWord] = useState('')
     const searchField = useRef();
 
     useEffect(()=>{
-        console.log("searchField", searchField);
         searchField.current.focus()
     })
 
@@ -30,8 +35,6 @@ export function SearchField (props){
     const handleKeyPress = (event)=>{
         if(event.key === 'Enter' && word.length>0){
             callSearch();
-            saveWordToDB(word);
-            dispatch((update(word)));
           }
     }
 
@@ -41,22 +44,29 @@ export function SearchField (props){
         if(true){
             getUrbanDictDef(word)
             .then((data)=>{
-                props.setUrbanDef(data);
+                dispatch(updateDict({dict:'urban', ...data}))
             })
+            .then(console.log('store', store.getState().dicts))
         }
+
         
     }
+    console.log(location)
 
-    const callSearch = ()=>{
+    const callSearch = async ()=>{
         if (word.length>0){
             search(word);
             setWord('');
+            saveWordToDB(word);
+            dispatch((update(word)));
+            if (location.pathname!=='/') {
+                navigate('/', { replace: true })
+            }
         }
     }
 
     return(
         <div>
-
             <TextField 
             size='small' 
             inputRef={searchField}

@@ -1,9 +1,14 @@
 import parse from 'html-react-parser';
 import { nanoid } from 'nanoid';
+import { useSelector } from 'react-redux';
 
-export function ShowUrbanDictDef (data) {
-    if (data.data.list){
-    const definitionsAr = data.data.list.map((obj)=>{
+
+export function ShowUrbanDictDef () {
+    const urban = useSelector((state)=>state.dicts.urban)
+    console.log("urban", urban);
+
+    if (urban){
+    const definitionsAr = urban.list.map((obj)=>{
       const url='https://www.urbandictionary.com/define.php?term=';
       let definition = obj.definition;
       let example = obj.example;
@@ -35,7 +40,6 @@ export function ShowUrbanDictDef (data) {
         <div>{obj.author} {obj.written_on.split('T')[0]}<br/>{obj.thumbs_up}/{obj.thumbs_down}</div>
       </li>)
     }) 
-    console.log('data from element', data.data.list);
     console.log("definitionsAr", definitionsAr);
     return (
       <div>

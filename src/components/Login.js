@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import loginService from '../services/login.js';
 import { useDispatch } from 'react-redux';
 import { update, remove } from '../features/user/userSlice.js'
+
 import { TextField, Button } from '@mui/material';
 import Modal from './Modal/Modal.js';
 
@@ -25,7 +26,7 @@ export function Login (props){
             // setUser(userData);
             setUsername('');
             setPassword('');
-            dispatch((update(user)))
+            dispatch((update(user))) //check without brakes
         }
 
     }
@@ -39,7 +40,7 @@ export function Login (props){
     
     return(
         <div id='modalLogin'>
-                <Button variant="contained" color="primary" onClick={() => setIsOpen(true)}>
+                <Button  variant="contained" color="primary" onClick={() => setIsOpen(true)}>
                 Login
                 </Button>
 
