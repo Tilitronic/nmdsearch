@@ -1,28 +1,57 @@
 import { useState, useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import parse from 'html-react-parser';
+import store from '../store.js';
+
+
+import {Togglable} from './Togglable.js';
+import { updateQuery, removeQuery, updateQueryHistory} from '../features/query/querySlice.js'
+import { updateHistory } from '../features/user/userSlice.js';
+import {getUserSearchHistory} from '../services/dbServices.js';
 
 
 export function SearchHistory(params){
     const [searchActive, setsearchActive] = useState(false);
     const [search, setSearch] = useState('');
     const [historyVisible, sethistoryVisible] = useState(false);
-    const history = useSelector((state) => state.user.history)
+    const localHistory = useSelector((state) => state.query.history);
+    const userHistory = useSelector((state) => state.user.history);
+    const query = useSelector((state)=>state.query.query)
     const inputRef = useRef();
+    const dispatch = useDispatch();
+    const shouldUseEffect=useRef(true);
+    const user = useSelector((state) => state.user.user);
 
     useEffect(()=>{
         inputRef.current.focus()
     })
 
-    const showHistory = () => {
-        // getHistory();
-        sethistoryVisible(true);
-    }
-
-    // const hideHistory = () => sethistoryVisible(false);
+    // useEffect(()=>{
+    //     if (shouldUseEffect.current){
+    //         shouldUseEffect.current=false;
+    //         const queryJSON = window.localStorage.getItem('queryMDSearch');
+    //         if (queryJSON) {
+    //         const query = JSON.parse(queryJSON)
+    //         dispatch((updateQuery(query)))
+    //         } 
+    //         const queryHistoryJSON = window.localStorage.getItem('queryHistoryMDSearch');
+    //         if (queryHistoryJSON) {
+    //         const queryHistory = JSON.parse(queryHistoryJSON).reverse();
+    //         console.log("queryHistory parsed from JSON", queryHistory);
+    //         for (let element of queryHistory){
+    //             console.log("tore.getState().user", store.getState().user);
+    //             if(store.getState().user){
+    //                 dispatch(updateHistory(element))
+    //             }
+    //             else{dispatch(updateQueryHistory(element));
+    //             }  
+    //         }
+    //     }}
+    // }, [])
 
     const handleSearchChange = (event) => {
-        console.log(event.target.value)
-        console.log("event", event);
+        // console.log(event.target.value)
+        // console.log("event", event);
         setSearch(event.target.value);
         if(setSearch===''){
           setsearchActive(false)
@@ -30,37 +59,47 @@ export function SearchHistory(params){
         else{setsearchActive(true)}
       }
 
-    const historyToShow = searchActive ? history.filter((note)=>search===note.content.substring(0,search.length)) : history;
+    // console.log("userHistory", userHistory);
+    const actualHistory = user ? userHistory : localHistory;
+    // console.log("actualHistory", actualHistory);
 
-   
+    const historyToShow = searchActive ? actualHistory.filter((element)=>search===element.content.substring(0,search.length)) : actualHistory;
+    // console.log("historyToShow", historyToShow);
 
-    
-    
-    
+
+
     return (
         <div>
-        {/* {!historyVisible && <button onClick={showHistory}>show history</button>}
-        {historyVisible && <button onClick={hideHistory}>hide history</button>}
-
-        
-        {historyVisible && null} */}
-            <div>
-                Search <input ref={inputRef} id="search" value={search} onChange={handleSearchChange}/>
-                <ul>
-                    {historyToShow.map(query=>
-                    // <li key={query.id}>{query.content}</li>
-                    <Query key={query.id} query={query}/>
-                    )}
-                </ul>
+            <div className='lastQuery'>
+                {/* {actualHistory[0].content && actualHistory[0].content} */}
             </div>
+            <div>
+                <div>query: {query}</div>
+                <div>{parse('    ')}</div>
+            </div>
+            <Togglable turnOn='show history!' turnOff1='hide history'>
+                <div>
+                    Search <input ref={inputRef} id="search" value={search} onChange={handleSearchChange}/>
+                    <ul>
+                        {historyToShow.map(element=>{
+                            return <Query key={element.id} element={element}/>
+                        }
+                        // <li key={query.id}>{query.content}</li>
+                        
+                        )}
+                    </ul>
+                </div>
+            </Togglable>
+ 
+
         </div>
     )
 }
 
 
-function Query ({query}){
-
+function Query ({element}){
+    // console.log("element", element);
     return(
-      <li>{query.content}</li>
+        <li>{element.content}</li>
     )
   }

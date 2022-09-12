@@ -1,0 +1,17 @@
+.sourcesFormGroup {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: pink;
+  width: 600px;
+  height: 50px;
+}
+
+.sourcesFormControlLabel{
+    max-height: 15px;
+    padding: 2px;
+}
+
+.sourcesCheckbox{
+
+}

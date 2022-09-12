@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import loginService from '../services/login.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { update, remove } from '../features/user/userSlice.js'
+import {getUserSearchHistory} from '../services/dbServices.js'
 
+// material ui
 import { TextField, Button } from '@mui/material';
 import Modal from './Modal/Modal.js';
 
@@ -21,12 +23,13 @@ export function Login (props){
         console.log("user", user);
         window.localStorage.setItem(
             'loggedMDSearchUser', JSON.stringify(user)
-            ) 
+            );
         if (user){
             // setUser(userData);
             setUsername('');
             setPassword('');
-            dispatch((update(user))) //check without brakes
+            dispatch(update(user)); //check without brakes
+            getUserSearchHistory();
         }
 
     }

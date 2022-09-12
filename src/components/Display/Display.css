@@ -1,0 +1,14 @@
+.displayWrapper {
+  background-color: bisque;
+  min-width: min-content;
+  max-width: 500px;
+  margin-right: 10px;
+
+}
+
+.displayBar {
+    background-color: rgb(157, 221, 132);
+    width: max;
+    display: flex;
+    justify-content: space-between;
+}

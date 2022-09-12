@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { update, remove} from '../features/user/userSlice.js';
+import { update, remove, removeHistory} from '../features/user/userSlice.js';
 import { useState } from 'react';
 
 import { Button, Box, Menu, Typography, MenuItem } from '@mui/material';
@@ -9,8 +9,10 @@ function Logout (){
     const dispatch = useDispatch()
 
     const logout = ()=>{
-        dispatch((remove(user)))
-        window.localStorage.removeItem('loggedMDSearchUser')
+        dispatch(remove(user));
+        dispatch(removeHistory())
+        window.localStorage.removeItem('loggedMDSearchUser');
+        window.localStorage.removeItem('queryHistoryMDSearch');
     }
     return(
         <Button size='small' variant="contained" color="primary" onClick={logout}>Logout</Button>

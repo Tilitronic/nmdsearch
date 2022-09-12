@@ -1,55 +1,51 @@
 import './header.css'
+
+
+
+//redux state
 import { useDispatch, useSelector } from 'react-redux';
 import { update, remove} from '../../features/user/userSlice.js';
+import { updateQuery, removeQuery, updateQueryHistory } from '../../features/query/querySlice.js'
 import {useState, useEffect} from 'react';
+
+//react elements
 import {SearchField} from '../SearchField.js';
-import {Togglable} from '../Togglable.js';
 import { SearchHistory } from "../SearchHistory.js";
-import {getUserSearchHistory} from '../../services/dbServices.js';
+import { Parametres } from '../Parametres';
 import { LoginAndProfile } from '../LoginAndProfile.js';
-import {
-    BrowserRouter as Router,
-    Routes, Route, Link
-  } from "react-router-dom"
+import { Navigation } from '../Navigation/Navigation'; 
 
 //modern ui
-import { AppBar } from '@mui/material';
+import { AppBar, Toolbar, Divider } from '@mui/material';
 
 export function  Header(){
     const [urbanDef, setUrbanDef] = useState('');
-    const [loginVisible, setLoginVisible] = useState(false)
   
     const updateUrbanState = (data)=>{setUrbanDef(data)};
     const user = useSelector((state) => state.user.user)
     const dispatch = useDispatch();
-
-    useEffect(()=>{
-        const loggedUserJSON = window.localStorage.getItem('loggedMDSearchUser');
-        if (loggedUserJSON) {
-          const user = JSON.parse(loggedUserJSON)
-          dispatch((update(user)))
-        }  }, [])
-
+   
     return(
         <AppBar>
-        <div className='header'>
-            <SearchField setUrbanDef={updateUrbanState}/>
-            <div>
-            <Togglable turnOn='show history!' turnOff1='hide history' onTurnOnFunction={getUserSearchHistory}>
-                <SearchHistory/>
-            </Togglable>
-            </div>
-            <div id='navigation'>
-                <Link to="/">main</Link>
-                <Link to="about">about</Link>
-            </div>
-            <div>
-                Parametres
-            </div>
-            <div id='loginAndProfileWrapper'>
-                <LoginAndProfile/>
-            </div>
-        </div>
+            {/* <Toolbar> */}
+                <div className='header'>
+                    <div className='search'>
+                        <SearchField setUrbanDef={updateUrbanState}/>
+                    </div>
+                    <div className='history'>
+                        <SearchHistory/>
+                    </div>
+                    <div className='navigation'>
+                        <Navigation/>
+                    </div>
+                    <div className='params'>
+                        <Parametres/>
+                    </div>
+                    <div id='loginAndProfileWrapper'>
+                        <LoginAndProfile/>
+                    </div>
+                </div>
+            {/* </Toolbar> */}
         </AppBar>
     )   
 }

@@ -18,7 +18,7 @@ export const userSlice = createSlice({
       state.history=[];
     },
     updateHistory: (state, action)=>{
-        if(state.user){state.history = action.payload}
+        if(state.user){state.history = [action.payload, ...state.history]}
     },
     removeHistory: (state) => {
         state.history=[]; 

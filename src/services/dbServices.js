@@ -79,10 +79,20 @@ export async function getUserSearchHistoryRequest(){
 }
 
 export async function getUserSearchHistory(){
-  const rawHistory = await getUserSearchHistoryRequest();
-  const history = rawHistory[0].words;
-  if (history){
-      store.dispatch(updateHistory(history));
-  };
-  console.log("history", history);
+  const user = store.getState().user.user;
+  if(user){
+    const rawHistory = await getUserSearchHistoryRequest();
+    const history = rawHistory[0].words.reverse();
+    if (history){
+        for (let element of history){
+          store.dispatch(updateHistory(element));
+        }
+    };
+    const hist = store.getState().user.history;
+    window.localStorage.setItem(
+        'queryHistoryMDSearch', JSON.stringify(hist)
+        );
+    console.log("history", history);
+  }
+
 }
