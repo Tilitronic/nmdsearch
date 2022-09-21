@@ -22,8 +22,11 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "redux-thunk": "^2.4.1",
+    "sass": "^1.54.9",
+    "timers": "^0.1.1",
     "web-vitals": "^2.1.4",
-    "wordnet-db": "^3.1.14"
+    "wordnet-db": "^3.1.14",
+    "xml2js": "^0.4.23"
   },
   "scripts": {
     "start": "react-scripts start",

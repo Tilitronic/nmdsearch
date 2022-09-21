@@ -1,7 +1,7 @@
-import {sourcesAr} from '../dicts.js';
+import {sourcesAr} from '../data/dicts.js';
 import parse from 'html-react-parser';
 
-export function Sources(){
+export function SourcesData(){
     
     return(
       sourcesAr.map(obj=>
@@ -12,3 +12,12 @@ export function Sources(){
     )
    
   }
+
+export function Sources(){
+  
+  return(
+    <ul>
+      <SourcesData/>
+    </ul>
+  )
+}

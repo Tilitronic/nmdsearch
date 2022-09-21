@@ -1,10 +1,14 @@
 .sourcesFormGroup {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  background-color: pink;
-  width: 600px;
+  min-width: 290px;
+  max-width: fit-content;
   height: 50px;
+}
+
+.sourcesFormControlLabel{
+  margin-left: 10px;
+  margin-top: 4px;
 }
 
 .sourcesFormControlLabel{
@@ -13,5 +17,17 @@
 }
 
 .sourcesCheckbox{
+  padding: 1px;
+}
 
+/* .sourcesParam{
+  padding: 5px;
+} */
+
+.MuiButtonBase-root{
+  padding: 3px;
+}
+
+.MuiFormControlLabel-root{
+  width: fit-content;
 }

@@ -2,30 +2,31 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     padding: 10px;
 }
 .search{
-    background-color: rgb(43, 226, 195);   
+    /* background-color: rgb(43, 226, 195);    */
 }
 .css-1u3bzj6-MuiFormControl-root-MuiTextField-root{
     background-color: brown;
 }
 .history{
-    background-color: rgb(43, 226, 195);   
+    /* background-color: rgb(43, 226, 195);    */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .navigation {
-    background-color: rgb(43, 226, 195);   
+    /* background-color: rgb(43, 226, 195);    */
 }
 
 .params {
-    background-color: rgb(43, 226, 195);
+    /* background-color: rgb(43, 226, 195); */
 }
 
 #LoginAndProfile {
-    background-color: rgb(43, 226, 195);
+    /* background-color: rgb(43, 226, 195); */
 }
 

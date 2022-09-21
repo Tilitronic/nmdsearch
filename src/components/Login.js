@@ -43,7 +43,7 @@ export function Login (props){
     
     return(
         <div id='modalLogin'>
-                <Button  variant="contained" color="primary" onClick={() => setIsOpen(true)}>
+                <Button  variant="contained" color="secondary" onClick={() => setIsOpen(true)}>
                 Login
                 </Button>
 

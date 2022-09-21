@@ -15,13 +15,17 @@ import { Display } from '../Display/Display.jsx';
 import { ShowWordnet } from '../ShowWordnet.js';
 import { Togglable } from '../../components/Togglable.js';
 import {ShowUrbanDictDef} from '../../components/ShowUrbanDictDef.js';
+import { ShowWordnik } from '../ShowWordnik.js';
+import { ShowBabelnet } from '../ShowBabenet.js';
 
 
 import parse from 'html-react-parser';
 import store from '../../store.js';
 
 export function Home(){
-    
+    const dictsState = useSelector((state)=>state.dicts);
+    const dictsParam = useSelector((state)=>state.parametres);
+
     
   
     // getDatamuseSug('dic')
@@ -36,12 +40,25 @@ export function Home(){
 
     return(
         <div className='mainDisplayWrapper'>
+          {dictsParam.urban.checked && 
           <Display name={'Urban Dictionary'}>
             <ShowUrbanDictDef/>
-          </Display>
+          </Display>}
+          {dictsParam.wordnet.checked &&
           <Display name={'WordNet'}>
             <ShowWordnet/>
-          </Display>
+          </Display>}
+          { dictsParam.wordnik.checked &&      
+          <Display name={'Wordnik'}>
+            <ShowWordnik/>
+          </Display>}
+          { dictsParam.babelnet.checked &&      
+          <Display name={'BabelNet'}>
+            <ShowBabelnet/>
+          </Display>}
+          
+
+
           {/* <ShowNotes/> */}
         </div>
     )

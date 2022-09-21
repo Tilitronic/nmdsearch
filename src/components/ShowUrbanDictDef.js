@@ -2,6 +2,12 @@ import parse from 'html-react-parser';
 import { nanoid } from 'nanoid';
 import { useSelector } from 'react-redux';
 
+//material ui
+import {Typography, Box } from '@mui/material';
+
+function makeALink(phrase, link){
+  return parse(`<a href='${link}' target='_blank' rel='noreferrer noopener'>${phrase}</a>`)
+}
 
 export function ShowUrbanDictDef () {
     const urban = useSelector((state)=>state.dicts.urban)
@@ -32,20 +38,32 @@ export function ShowUrbanDictDef () {
         text3.forEach((element)=>example=example.replace(element, `<a href="${url+text4[text3.indexOf(element)]}" target="_blank" rel="noreferrer noopener">${text4[text3.indexOf(element)]}</a>`));
         example=example.replaceAll('\n', '<br/>');
       }
-  
+
+      const key = obj.permalink.split(/ /)[0].replace(/[^\d]/g, '')
+      const rawTime0 = obj.written_on.split('T')[0] //YYYY-MM-DD
+      const rawTime1 = rawTime0.split('-')
+      const time=rawTime1[2]+'.'+rawTime1[1]+'.'+rawTime1[0]
       return(  
-      <li key={nanoid()}>
-        <div><a href={obj.permalink} target="_blank" rel="noreferrer noopener">{obj.word}</a></div>
-        <div>{parse(definition)}<br/>{parse(example)}</div>
-        <div>{obj.author} {obj.written_on.split('T')[0]}<br/>{obj.thumbs_up}/{obj.thumbs_down}</div>
-      </li>)
+      <div key={key} className='defBlock'>
+        <Typography  variant='defHead' className='defHead'>{makeALink(obj.word,obj.permalink)}</Typography >
+        <Typography  
+          variant='defBody' 
+          className='defBody' 
+        >{parse(definition)}</Typography >
+        <Typography variant='defExamples' className='defExamples'>{parse(example)}</Typography >
+        <Box className='autAndRate'>
+          <Typography variant='defAut' className='defAut' align='right'>{'by '+obj.author}{time}</Typography >
+          <Typography variant='defRate' align='right'>{obj.thumbs_up}/{obj.thumbs_down}</Typography >
+        </Box>
+
+      </div>)
     }) 
     console.log("urban dict definitionsAr", definitionsAr);
     return (
       <div>
-        <ul>
+        <div>
           {definitionsAr}
-        </ul>
+        </div>
       </div>
     )}
     return null

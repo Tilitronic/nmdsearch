@@ -1,6 +1,10 @@
 .mainDisplayWrapper {
-    margin-top: 80px;
-    background-color: rgba(82, 70, 70, 0.082);
+    margin-top: 70px;
+    /* background-color: rgb(187, 26, 219); */
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    /* width: 100%; */
+    /* height: calc(100% - 100px); */
+    /* height: 500px; */
 }

@@ -25,7 +25,11 @@ export async function getDatamuseSug(word,num=10){
     try{
         const response = await axios.get(url+sug+word+max+num)
         console.log(`The Datamuse suggestion data from response is: `, response);
-        return response.data
+        const data = response.data
+        const lableddData = data.map((obj)=>{
+          return({label: obj.word, ...obj})
+        })
+        return lableddData
       }
       catch(error){
         console.log("Request to Datamuse suggestion failed:", error)

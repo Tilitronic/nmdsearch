@@ -3,23 +3,27 @@ import { useSelector } from "react-redux"
 import parse from 'html-react-parser';
 import { nanoid } from 'nanoid';
 
+//material ui
+import {Typography } from '@mui/material';
+
 export function ShowWordnet(){
     const data = useSelector((state)=>state.dicts.wordnet)
     console.log("redux state wordnet", data);
     if (data){
-        const definitionsAr = data.list.map((obj)=>{
+        const dictDataAr = data.list.map((obj)=>{
+            const partOfSpeech = obj.pos
         return(
-            <li key={obj.synsetOffset}>
-                <div>{obj.lemma} {'('}{obj.pos}{')'}</div>
-                <div>{obj.def}</div>
+            <div key={obj.synsetOffset} className='defBlock'>
+                <Typography  variant='defHead' className='defHead'>{obj.lemma} {partOfSpeech ? '('+partOfSpeech+')' : null}</Typography>
+                <Typography  variant='defBody' className='defBody'>{obj.def}</Typography>
                 {obj.exp.length>0 &&
                     <div>
                     <p>Examples</p>
-                    <ul>
+                    <ul className="divExamples">
                         {obj.exp.map((exp, index)=>{
                             return(
-                                <li key={obj.synsetOffset+index}>
-                                    {exp}
+                                <li key={index+'example'+obj.synsetOffset}>
+                                    <Typography variant='defExamples'> {exp} </Typography >
                                 </li>
                             )
                         })}
@@ -30,11 +34,11 @@ export function ShowWordnet(){
                     <div>
                         <p>Synonyms</p>
                         <ul>
-                            {obj.synonyms.map((syn)=>{
+                            {obj.synonyms.map((syn, index)=>{
                                 const synonym = syn.replaceAll('_', ' ')
                                 if(obj.lemma!==synonym){
                                     return(
-                                        <li key={nanoid()}>
+                                        <li key={index+'synonym'+obj.synsetOffset}>
                                             {synonym}
                                         </li>
                                     ) 
@@ -43,14 +47,14 @@ export function ShowWordnet(){
                         </ul>
                     </div>
                 }
-            </li>
+            </div>
         )
         })
         return(
             <div>
-                <ul>
-                    {definitionsAr}
-                </ul>
+                <div>
+                    {dictDataAr}
+                </div>
                 
             </div>
             )

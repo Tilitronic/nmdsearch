@@ -6,6 +6,8 @@ import { updateDict } from "../features/sources/dictsSlice";
 //sources services
 import { getUrbanDictDef } from "./urbanDict";
 import { getWordNetData } from "./wordnet";
+import {getWordnikData} from "./wordnik";
+import {getBabelNetDef} from "./babelNet.js"
 
 function processData(data, sourceName){
     switch(sourceName){
@@ -14,6 +16,12 @@ function processData(data, sourceName){
             break;
         case 'wordnet':
             return {list: data, dict: sourceName};
+            break;
+        case 'babelnet':
+            return {list: data, dict: sourceName};
+            break;
+        case 'wordnik':
+            return data;
             break;
         default:
             return data;
@@ -36,8 +44,13 @@ export function makeRequests(query){
             .then((data)=>processData(data, element.name))
             .then((data)=>store.dispatch(updateDict({dict: element.name, ...data})));
         }
-        if(element.name==='wiktionary'){
-            getDictData(query)
+        if(element.name==='wordnik'){
+            getWordnikData(query)
+            .then((data)=>processData(data, element.name))
+            .then((data)=>store.dispatch(updateDict({dict: element.name, ...data})));
+        }
+        if(element.name==='babelnet'){
+            getBabelNetDef(query)
             .then((data)=>processData(data, element.name))
             .then((data)=>store.dispatch(updateDict({dict: element.name, ...data})));
         }
@@ -46,7 +59,7 @@ export function makeRequests(query){
             .then((data)=>processData(data, element.name))
             .then((data)=>store.dispatch(updateDict({dict: element.name, ...data})));
         }
-        if(element.name==='wordnik'){
+        if(element.name==='wiktionary'){
             getDictData(query)
             .then((data)=>processData(data, element.name))
             .then((data)=>store.dispatch(updateDict({dict: element.name, ...data})));

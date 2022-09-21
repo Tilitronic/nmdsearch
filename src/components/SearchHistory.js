@@ -9,6 +9,9 @@ import { updateQuery, removeQuery, updateQueryHistory} from '../features/query/q
 import { updateHistory } from '../features/user/userSlice.js';
 import {getUserSearchHistory} from '../services/dbServices.js';
 
+//material ui
+import { TextField, Autocomplete  } from '@mui/material';
+
 
 export function SearchHistory(params){
     const [searchActive, setsearchActive] = useState(false);
@@ -22,9 +25,9 @@ export function SearchHistory(params){
     const shouldUseEffect=useRef(true);
     const user = useSelector((state) => state.user.user);
 
-    useEffect(()=>{
-        inputRef.current.focus()
-    })
+    // useEffect(()=>{
+    //     inputRef.current.focus()
+    // })
 
     // useEffect(()=>{
     //     if (shouldUseEffect.current){
@@ -62,7 +65,10 @@ export function SearchHistory(params){
     // console.log("userHistory", userHistory);
     const actualHistory = user ? userHistory : localHistory;
     // console.log("actualHistory", actualHistory);
-
+    const labledHistory = actualHistory.map((obj)=>{
+        return {label: obj.content, ...obj}
+    })
+    console.log("labledHistory", labledHistory);
     const historyToShow = searchActive ? actualHistory.filter((element)=>search===element.content.substring(0,search.length)) : actualHistory;
     // console.log("historyToShow", historyToShow);
 
@@ -73,11 +79,24 @@ export function SearchHistory(params){
             <div className='lastQuery'>
                 {/* {actualHistory[0].content && actualHistory[0].content} */}
             </div>
-            <div>
+            {/* <div>
                 <div>query: {query}</div>
                 <div>{parse('    ')}</div>
+            </div> */}
+            <div>
+            <Autocomplete
+                disablePortal
+                size="small"
+                id="combo-box-demo"
+                options={labledHistory.slice(0, 50)}
+                sx={{ width: 150 }}
+                value={query}
+                renderInput={(params) => <TextField {...params} label="history" />}
+            />
             </div>
-            <Togglable turnOn='show history!' turnOff1='hide history'>
+
+
+            {/* <Togglable turnOn='show history!' turnOff1='hide history'>
                 <div>
                     Search <input ref={inputRef} id="search" value={search} onChange={handleSearchChange}/>
                     <ul>
@@ -89,7 +108,7 @@ export function SearchHistory(params){
                         )}
                     </ul>
                 </div>
-            </Togglable>
+            </Togglable> */}
  
 
         </div>

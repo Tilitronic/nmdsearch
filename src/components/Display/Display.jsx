@@ -3,26 +3,41 @@ import React from 'react';
 import styles from './Display.css';
 
 //material ui
-import { AppBar, Toolbar, Button, IconButton, Checkbox, Typography } from '@mui/material';
+import { AppBar, Toolbar, Button, IconButton, Checkbox, Typography, Box, Paper } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export function Display({children, name}) {
   return (
-    <div className='displayWrapper'>
-      <div className='displayBar'>
-        <Typography>{name}</Typography>
-        <Checkbox/>
-        <IconButton>
-          <CloseIcon/>
-        </IconButton>
-        <IconButton>
-          <ExpandMoreIcon/>
-        </IconButton>
-      </div>
-      <div className='displayContent'>
+    <Box className='displayWrapper'>
+      <Box 
+        className='displayBar'
+        bgcolor='color1'
+      >
+        <Typography
+          variant='subtitle2'
+          align='center'
+          className='displayBarTypography'
+        >{name}</Typography>
+        <div className='displayBarButtons'>
+          <Checkbox/>
+          <IconButton>
+            <CloseIcon/>
+          </IconButton>
+          <IconButton>
+            <ExpandMoreIcon/>
+          </IconButton> 
+        </div>
+        
+      </Box>
+      <Box className='displayContent'
+        sx={{
+          border: 'color1',
+          borderLeft: '1px'
+        }}
+      >
         {children}
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }

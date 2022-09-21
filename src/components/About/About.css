@@ -1,0 +1,12 @@
+.boxAbout {
+  margin-top: 70px;
+  height: calc(100% - 70px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+a { 
+  color: inherit;
+  text-decoration: none;
+} 
+

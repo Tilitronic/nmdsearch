@@ -16,7 +16,9 @@ import { LoginAndProfile } from '../LoginAndProfile.js';
 import { Navigation } from '../Navigation/Navigation'; 
 
 //modern ui
-import { AppBar, Toolbar, Divider } from '@mui/material';
+import { AppBar, Toolbar, Divider, ThemeProvider } from '@mui/material';
+import {mainTheme} from '../../themes/themes.js'
+
 
 export function  Header(){
     const [urbanDef, setUrbanDef] = useState('');
@@ -26,7 +28,12 @@ export function  Header(){
     const dispatch = useDispatch();
    
     return(
-        <AppBar>
+        <AppBar
+        color='background1'
+        position='fixed' sx={{ 
+            borderBottom: 1,
+            height: '70px',
+            zIndex: (theme) => theme.zIndex.drawer + 1 }}>
             {/* <Toolbar> */}
                 <div className='header'>
                     <div className='search'>
@@ -35,11 +42,11 @@ export function  Header(){
                     <div className='history'>
                         <SearchHistory/>
                     </div>
-                    <div className='navigation'>
-                        <Navigation/>
-                    </div>
                     <div className='params'>
                         <Parametres/>
+                    </div>
+                    <div className='navigation'>
+                        <Navigation/>
                     </div>
                     <div id='loginAndProfileWrapper'>
                         <LoginAndProfile/>

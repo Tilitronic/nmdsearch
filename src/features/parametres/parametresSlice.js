@@ -14,40 +14,50 @@ initialState: {
         label: 'WordNet',
         name: 'wordnet',
         key: nanoid(),
-        checked: true 
-    },
-    wiktionary: {
-        label: 'Wiktionary',
-        name: 'wiktionary',
-        key: nanoid(),
-        checked: false 
-    },
-    oxford: {
-        label: 'Oxford dictionary',
-        name: 'oxford',
-        key: nanoid(),
-        checked: false 
+        checked: true,
     },
     wordnik: {
         label: 'Wordnik',
         name: 'wordnik',
         key: nanoid(),
-        checked: false 
+        checked: true,
+        parametres: {
+            definition: true,
+            pronunciations: true,
+            audio: true,
+            examples: true,
+        } 
     },
-    meriam: {
-        label: 'Meriam-Webster',
-        name: 'meriam',
+    babelnet: {
+        label: 'BabelNet',
+        name: 'babelnet',
         key: nanoid(),
-        checked: false 
+        checked: false,
     },
-    words: {
-        label: 'Words',
-        name: 'words',
-        key: nanoid(),
-        checked: false 
-    }
-
-
+    // wiktionary: {
+    //     label: 'Wiktionary',
+    //     name: 'wiktionary',
+    //     key: nanoid(),
+    //     checked: false 
+    // },
+    // words: {
+    //     label: 'Words',
+    //     name: 'words',
+    //     key: nanoid(),
+    //     checked: false 
+    // },
+    // oxford: {
+    //     label: 'Oxford dictionary',
+    //     name: 'oxford',
+    //     key: nanoid(),
+    //     checked: false 
+    // },
+    // meriam: {
+    //     label: 'Meriam-Webster',
+    //     name: 'meriam',
+    //     key: nanoid(),
+    //     checked: false 
+    // },
 },
 reducers: {
     toggleDictState: (state, action) => 

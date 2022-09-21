@@ -6,31 +6,12 @@ import './Parametres.css';
 import { useSelector, useDispatch } from 'react-redux';
 import {toggleDictState} from '../../features/parametres/parametresSlice.js'
 
-import {Checkbox, Box, FormGroup, FormControlLabel} from '@mui/material';
+import {Checkbox, Box, FormGroup, FormControlLabel, Paper} from '@mui/material';
 
 export function Parametres() {
   const parametres = useSelector((state) => state.parametres)
   const dispatch = useDispatch();
-  // const sources = [
-  //   { 
-  //     lable: 'Urban dictionary',
-  //     name: 'urban',
-  //     key: nanoid(),
-  //     default: true
-  //   },
-  //   { 
-  //     lable: 'Wordnet',
-  //     name: 'wordnet',
-  //     key: nanoid(),
-  //     default: false
-  //   },
-  //   { 
-  //     lable: 'Wiktionary',
-  //     name: 'wiktionary',
-  //     key: nanoid(),
-  //     default: false
-  //   },
-  // ]
+
   const handleCheckbox = (event) => {
     dispatch(toggleDictState({dict: event.target.id}))
     //dispatch
@@ -38,12 +19,20 @@ export function Parametres() {
   
   return(
     <div className='parametres'>
-      <Box className='sources'>
+      <Paper className='sourcesParam'
+        sx={{
+          backgroundColor: "secondary"
+        }}
+      >
         <FormGroup
         className='sourcesFormGroup'
+        sx={{
+          flexDirection: 'row'
+        }}
         >
           {Object.values(parametres).map((element)=> 
             <FormControlLabel
+            key={element.name+'ParametresFormcontrol'}
               label={element.label}
               className='sourcesFormControlLabel'
               control={
@@ -52,13 +41,12 @@ export function Parametres() {
                   id={element.name}
                   checked={element.checked}
                   onChange={handleCheckbox}
-                  FormControlLabel
                 />
               }
             />
           )}
         </FormGroup>
-      </Box>
+      </Paper>
     </div>
   )
 }

@@ -1,7 +1,18 @@
-li > p {
-  background-color: aquamarine; 
+.buy-container {
+  overflow-y: hidden;
+  width: 100vw;
 }
-li > h3 {
-  margin: 0;
-  margin-bottom: -7px;
+
+.MuiContainer-root {
+  width: 100%;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0;
+
+}
+.css-1oqqzyl-MuiContainer-root{
+  padding-left: 0;
+  padding-right: 0;
 }

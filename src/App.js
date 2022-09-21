@@ -3,6 +3,7 @@ import {
   Routes, Route, Link
 } from "react-router-dom"
 import { useState, useRef, useEffect } from 'react';
+import styles from './index.css'
 
 //redux store
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,10 +14,12 @@ import { update, updateHistory } from "./features/user/userSlice.js";
 //react components
 import {Header} from './components/Header';
 import {Home} from './components/Home';
-import { About } from './components/About.js';
+import { About } from './components/About';
 
 //material ui
-import { Container } from '@mui/material';
+import { Container, ThemeProvider, Box, CssBaseline } from '@mui/material';
+import { display } from "@mui/system";
+import {mainTheme} from './themes/themes.js'
 
 
 
@@ -63,16 +66,25 @@ function App() {
 }, [])
 
   return (
-    <Container>
-      <div>
-        <Header/>
-        
-        <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/about' element={<About/>}/>
-        </Routes>
-      </div>
-    </Container>
+    // <Container
+    // // sx={{
+    // //   maxWidth: false
+    // // }}
+    // >
+    <ThemeProvider theme={mainTheme}>
+      <CssBaseline />
+      <Box >
+        <div>
+          <Header/>
+          
+          <Routes>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/about' element={<About/>}/>
+          </Routes>
+        </div>
+      </Box> 
+    </ThemeProvider>    
+    // </Container>
  
     
   );
