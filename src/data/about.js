@@ -1,9 +1,18 @@
 import { Sources } from "../components/Sources.js"
 
+const introText = `
+The MDSearch page was created primarily to search for the meaning of 
+an English word in several sources at once. When I watched cartoons or 
+read books in English and looked for definitions of unfamiliar words, 
+I often found myself having to look up the word in several places because 
+the first place provided unclear definition, definition that don't fit or 
+no definition at all. It annoyed me!
+`
+
 export const pageData = [
     {
       header: 'Indroduction',
-      text: "MDSearch webpage in firs place is createt to provide definitions of English words from multiple sources. In My personal expirience during reading books or watchin cartoons in English it was often not enough to check definition just in one place, because definition always can be unclear, wrong to context or even absent, because word is a slang and I should check it in My belowed Urban Dictionary."
+      text: introText
     },
     {
         header: 'APIs and services',

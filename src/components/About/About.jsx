@@ -28,8 +28,8 @@ const drawerWidth = 250;
 
 const navigationTitles = pageData.map((element, index)=>{
   return(
-    <a href={"#element"+index}>
-    <ListItem key={"element"+index} disablePadding>
+    <a href={"#element"+index} className='navLink' key={"element"+index}>
+    <ListItem disablePadding>
       
       <ListItemButton>
         <ListItemText primary={element.header} />
@@ -41,19 +41,29 @@ const navigationTitles = pageData.map((element, index)=>{
 })
 
 const textContent=pageData.map((element, index)=>{
-  let contBodyData 
-  if(element.text){
-    contBodyData=element.text
-  }
-  else if(element.elements){
-    contBodyData=element.elements
-  }  
+  // let contBodyData 
+  // if(element.text){
+  //   contBodyData=element.text
+  // }
+  // else if(element.elements){
+  //   contBodyData=element.elements
+  // }  
   return(
-    <div>
-      <Typography variant='h4' id={'element'+index}>{element.header}</Typography>
+    <div key={'element'+index}>
+      <Typography variant='h4' id={'element'+index}>
+        {element.header}
+      </Typography>
+      {element.text && 
         <Typography paragraph>
-          {contBodyData}
+          {element.text}
         </Typography>
+      }
+      {element.elements &&
+        <div>
+            {element.elements}
+        </div>
+      }
+
     </div>
   )
 })
