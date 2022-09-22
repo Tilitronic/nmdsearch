@@ -11,7 +11,7 @@ import axios from 'axios';
 // }
 
 export async function getUrbanDictDef (word){
-    const url='http://api.urbandictionary.com/v0/define?term='+word;
+    const url='https://api.urbandictionary.com/v0/define?term='+word;
     try{
       const response = await axios.get(url)
       console.log(`The Urban Dictionary data from response is: `, response);
