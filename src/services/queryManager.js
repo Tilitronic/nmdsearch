@@ -10,22 +10,28 @@ import {getWordnikData} from "./wordnik";
 import {getBabelNetDef} from "./babelNet.js"
 
 function processData(data, sourceName){
-    switch(sourceName){
-        case 'urban':
-            return data;
-            break;
-        case 'wordnet':
-            return {list: data, dict: sourceName};
-            break;
-        case 'babelnet':
-            return {list: data, dict: sourceName};
-            break;
-        case 'wordnik':
-            return data;
-            break;
-        default:
-            return data;
+    if (data){
+        switch(sourceName){
+            case 'urban':
+                return data;
+                break;
+            case 'wordnet':
+                return {list: data, dict: sourceName};
+                break;
+            case 'babelnet':
+                return {list: data, dict: sourceName};
+                break;
+            case 'wordnik':
+                return data;
+                break;
+            default:
+                return data;
+        }
     }
+    // else{
+    //     return null
+    // }
+
 }
 
 

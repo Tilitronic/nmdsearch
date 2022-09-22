@@ -21,58 +21,62 @@ function sortDefinitions (origins, definitions){
 }
 
 function Definitions(){
-    const data = useSelector((state)=>state.dicts.wordnik.definitions)
-    if(data){
-        const defOrigins = data.map((obj)=>{return({name: obj.attributionText, source: obj.sourceDictionary, url: obj.attributionUrl, id: obj.sourceDictionary, definitions: []})})
-        console.log("defOrigins", defOrigins);
-        const uniqDefOrigins = [...new Map(defOrigins.map((item) => [item["id"], item])).values()];
-        console.log("uniqDefOrigins", uniqDefOrigins);
-        sortDefinitions(uniqDefOrigins, data)
+    const data = useSelector((state)=>state.dicts.wordnik)
+    if(!data?.definitions){
+        return
+    }
+    const defData = useSelector((state)=>state.dicts.wordnik.definitions)
 
-        const reactElementsAr = uniqDefOrigins.map((origin, index)=>{
-            const originTitle = origin.name
-            const originLink = makeALink(origin.name, origin.url)
-            const definitionsAr = origin.definitions.map((obj, index)=>{
-                const word = makeALink(obj.word, obj.wordnikUrl)
-                const attribution = makeALink(obj.attributionText, obj.attributionUrl)
-                const xmlDefText = obj.text
-                // console.log("xmlDefText", xmlDefText);
-                const n1text = xmlDefText.replaceAll('xref', 'span')
-                const n2text = n1text.replaceAll('spn', 'span')
-                // console.log("n1text", n2text);
-                // const parsedText = xmlparser.parseString(
-                //     xmlDefText, function(err, result) {
-                //         result
-                //     })
-                // console.log("parsedText", parsedText);
-                const partOfSpeech = obj.partOfSpeech
-                return(
-                    <div className='defBlock' key={obj.id ? obj.id : "wordnetDef"+obj.sourceDictionary+index}>
-                        
-                        <Typography  variant='defHead' className='defHead'>{parse(word)} {partOfSpeech ? '('+partOfSpeech+')' : null}</Typography >
-                        <Typography variant='defBody' className='defBody'>{
-                        parse(n2text)
-                        }</Typography >
-                        {/* <div>{parse(attribution)}</div> */}
-                    </div>
-                )
-            })
-            if(origin.source!=='wordnet'){
-                return (
-                    <div key={'wordnikDef'+origin.url} className='dictName'>   
-                        <div>
-                            {parse(originLink)}
-                        </div>
-                        <div className="definitions">
-                            {definitionsAr}
-                        </div>
-                    </div>
+    const defOrigins = defData.map((obj)=>{return({name: obj.attributionText, source: obj.sourceDictionary, url: obj.attributionUrl, id: obj.sourceDictionary, definitions: []})})
+    console.log("defOrigins", defOrigins);
+    const uniqDefOrigins = [...new Map(defOrigins.map((item) => [item["id"], item])).values()];
+    console.log("uniqDefOrigins", uniqDefOrigins);
+    sortDefinitions(uniqDefOrigins, defData)
+
+    const reactElementsAr = uniqDefOrigins.map((origin, index)=>{
+        const originTitle = origin.name
+        const originLink = makeALink(origin.name, origin.url)
+        const definitionsAr = origin.definitions.map((obj, index)=>{
+            const word = makeALink(obj.word, obj.wordnikUrl)
+            const attribution = makeALink(obj.attributionText, obj.attributionUrl)
+            const xmlDefText = obj.text
+            // console.log("xmlDefText", xmlDefText);
+            const n1text = xmlDefText.replaceAll('xref', 'span')
+            const n2text = n1text.replaceAll('spn', 'span')
+            // console.log("n1text", n2text);
+            // const parsedText = xmlparser.parseString(
+            //     xmlDefText, function(err, result) {
+            //         result
+            //     })
+            // console.log("parsedText", parsedText);
+            const partOfSpeech = obj.partOfSpeech
+            return(
+                <div className='defBlock' key={obj.id ? obj.id : "wordnetDef"+obj.sourceDictionary+index}>
                     
-                )
-            }
-            return null
-            
+                    <Typography  variant='defHead' className='defHead'>{parse(word)} {partOfSpeech ? '('+partOfSpeech+')' : null}</Typography >
+                    <Typography variant='defBody' className='defBody'>{
+                    parse(n2text)
+                    }</Typography >
+                    {/* <div>{parse(attribution)}</div> */}
+                </div>
+            )
         })
+        if(origin.source!=='wordnet'){
+            return (
+                <div key={'wordnikDef'+origin.url} className='dictName'>   
+                    <div>
+                        {parse(originLink)}
+                    </div>
+                    <div className="definitions">
+                        {definitionsAr}
+                    </div>
+                </div>
+                
+            )
+        }
+        return null
+        
+    })
         
             
 
@@ -84,14 +88,16 @@ function Definitions(){
 
             
         )
-    }
-    return null
 }
 
 function Prononuc(){
-    const data = useSelector((state)=>state.dicts.wordnik.pronunciations)
-    if(data){
-        const pronunciations = data.map((obj, index)=>{
+    const data = useSelector((state)=>state.dicts.wordnik)
+    if(!data?.pronunciations){
+        return
+    }
+    const pronData = useSelector((state)=>state.dicts.wordnik.pronunciations)
+
+        const pronunciations = pronData.map((obj, index)=>{
             if(obj.rawType==='IPA'){
 
         return(
@@ -106,15 +112,14 @@ function Prononuc(){
             )
         }
         return null
-    }
-    return null
+
 }
 
 export function ShowWordnik(){
     const data = useSelector((state)=>state.dicts.wordnik)
-
-
-    
+    if(!data){
+        return
+    }  
     
     console.log("redux state wordnik", data);
     if(data){
