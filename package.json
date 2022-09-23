@@ -15,7 +15,6 @@
     "html-react-parser": "^3.0.1",
     "mongoose": "^6.5.2",
     "nanoid": "^4.0.0",
-    "natural": "^5.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
@@ -23,9 +22,9 @@
     "react-scripts": "5.0.1",
     "redux-thunk": "^2.4.1",
     "sass": "^1.54.9",
+    "stream": "^0.0.2",
     "timers": "^0.1.1",
     "web-vitals": "^2.1.4",
-    "wordnet-db": "^3.1.14",
     "xml2js": "^0.4.23"
   },
   "scripts": {

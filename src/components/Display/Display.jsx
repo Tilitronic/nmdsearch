@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './Display.css';
+import styles from './Display.scss';
 
 //material ui
 import { AppBar, Toolbar, Button, IconButton, Checkbox, Typography, Box, Paper } from '@mui/material';

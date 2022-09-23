@@ -22,15 +22,45 @@ import { ShowBabelnet } from '../ShowBabenet.js';
 import parse from 'html-react-parser';
 import store from '../../store.js';
 
+function SourcesResultsDisplays(){
+  const dictsParam = useSelector((state)=>state.parametres);
+
+
+  
+}
+
 export function Home(){
     const dictsState = useSelector((state)=>state.dicts);
     const dictsParam = useSelector((state)=>state.parametres);
 
-    
+    const displayElements=Object.values(dictsParam).map((element)=>{
+      if(!element.checked){
+        return
+      }
+      let sourceElement
+      switch (element.name) {
+        case 'urban':
+          sourceElement = <ShowUrbanDictDef/>
+          break;
+        case 'wordnet':
+          sourceElement = <ShowWordnet/>
+          break;
+        case 'wordnik':
+          sourceElement = <ShowWordnik/>
+          break;
+        case 'babelnet':
+          sourceElement = <ShowBabelnet/>
+          break;
+        default:
+          return;
+      }
+      return (
+        <Display name={element.label}>
+          {sourceElement}
+        </Display>
+      )
   
-    // getDatamuseSug('dic')
-    // getWordNetData('ass');
-    
+    })
   
     // subscribe makes subscribtion every time element renders, so there are more logs every time!
     // store.subscribe(()=>{
@@ -40,7 +70,7 @@ export function Home(){
 
     return(
         <div className='mainDisplayWrapper'>
-          {dictsParam.urban.checked && 
+          {/* {dictsParam.urban.checked && 
           <Display name={'Urban Dictionary'}>
             <ShowUrbanDictDef/>
           </Display>}
@@ -55,8 +85,8 @@ export function Home(){
           { dictsParam.babelnet.checked &&      
           <Display name={'BabelNet'}>
             <ShowBabelnet/>
-          </Display>}
-          
+          </Display>} */}
+          {displayElements}
 
 
           {/* <ShowNotes/> */}

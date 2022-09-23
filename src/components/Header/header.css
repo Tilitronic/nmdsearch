@@ -5,9 +5,7 @@
     align-items: center;
     padding: 10px;
 }
-.search{
-    /* background-color: rgb(43, 226, 195);    */
-}
+
 .css-1u3bzj6-MuiFormControl-root-MuiTextField-root{
     background-color: brown;
 }
@@ -16,17 +14,5 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.navigation {
-    /* background-color: rgb(43, 226, 195);    */
-}
-
-.params {
-    /* background-color: rgb(43, 226, 195); */
-}
-
-#LoginAndProfile {
-    /* background-color: rgb(43, 226, 195); */
 }
 
