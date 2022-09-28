@@ -57,7 +57,7 @@ export function SearchField (props){
 
     useEffect(()=>{
         searchField.current.focus()
-    })
+    }, [])
 
     const handleWordChange = async (event)=>{
         console.log(event.target.value);
