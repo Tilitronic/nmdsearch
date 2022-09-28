@@ -2,6 +2,8 @@ import parse from 'html-react-parser';
 import { nanoid } from 'nanoid';
 import { useSelector } from 'react-redux';
 
+import { TextResultUnit } from './TextResultUnit/TextResultUnit';
+
 //material ui
 import {Typography, Box } from '@mui/material';
 
@@ -44,19 +46,53 @@ export function ShowUrbanDictDef () {
       const rawTime1 = rawTime0.split('-')
       const time=rawTime1[2]+'.'+rawTime1[1]+'.'+rawTime1[0]
       return(  
-      <div key={key} className='defBlock'>
-        <Typography  variant='defHead' className='defHead'>{makeALink(obj.word,obj.permalink)}</Typography >
-        <Typography  
-          variant='defBody' 
-          className='defBody' 
-        >{parse(definition)}</Typography >
-        <Typography variant='defExamples' className='defExamples'>{parse(example)}</Typography >
-        <Box className='autAndRate'>
-          <Typography variant='defAut' className='defAut' align='right'>{'by '+obj.author}{time}</Typography >
-          <Typography variant='defRate' align='right'>{obj.thumbs_up}/{obj.thumbs_down}</Typography >
-        </Box>
+        <TextResultUnit 
+          head={
+          <Typography  variant='defHead' className='defHead'>
+            {makeALink(obj.word,obj.permalink)}
+          </Typography >
+          } 
+          color='bodyBBC' 
+          // className='defBlock'
+          expanded={true} 
+          type='1'
+        >
+          <Box 
+            sx={{
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+          >
+            
+            <Typography  
+              variant='defBody' 
+              className='defBody' 
+            >
+              {parse(definition)}
+            </Typography >
+            <TextResultUnit 
+              className='defExamples'
+              head='Examples'
+              color='exampBBC' 
+              expanded={true} 
+              type='2'
+            >
+                <Typography variant='defExamples' >{parse(example)}</Typography >
+            </TextResultUnit>
 
-      </div>)
+            <Box className='autAndRate'
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Typography variant='defAut' className='defAut' align='right'>{'by '+obj.author}{time}</Typography >
+              <Typography variant='defRate' align='right'>{obj.thumbs_up}/{obj.thumbs_down}</Typography >
+            </Box>
+          </Box>
+        </TextResultUnit>
+        )
     }) 
     console.log("urban dict definitionsAr", definitionsAr);
     return (

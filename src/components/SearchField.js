@@ -22,6 +22,27 @@ import { getDatamuseSug } from '../services/datamuse.js';
 import { TextField, Popper, Button, Input, InputLabel, InputAdornment, Autocomplete, FormControl, Box  } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search.js';
 import { height } from '@mui/system';
+import { alpha, styled } from '@mui/material/styles';
+
+const CssTextField = styled(TextField)({
+    '& label.Mui-focused': {
+      color: '#fffff',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#fffff',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#fffff',
+      },
+      '&:hover fieldset': {
+        borderColor: '#fffff',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#fffff',
+      },
+    },
+  });
 
 export function SearchField (props){
     const dispatch = useDispatch()
@@ -150,9 +171,13 @@ export function SearchField (props){
                             inputRef={searchField}
                             type="text" 
                             id='searchField' 
-                            color='primary'
+                            color='secondary'
                             value={word} 
                             label='search'
+                            variant="outlined"
+                            // InputLabelProps={{
+                            //     shrink: true,
+                            // }}
                             onChange={handleWordChange} 
                             onKeyPress={handleKeyPress}
                             onKeyDown={handleKeyDown}

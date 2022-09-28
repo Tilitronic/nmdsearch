@@ -12,10 +12,13 @@ export function Display({children, name}) {
     <Box className='displayWrapper'>
       <Box 
         className='displayBar'
-        bgcolor='color1'
+        bgcolor='background1'
+        sx={{
+          borderBottom: 1,
+        }}
       >
         <Typography
-          variant='subtitle2'
+          variant='displayColName'
           align='center'
           className='displayBarTypography'
         >{name}</Typography>

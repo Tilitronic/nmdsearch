@@ -6,7 +6,7 @@ import './Parametres.css';
 import { useSelector, useDispatch } from 'react-redux';
 import {toggleDictState} from '../../features/parametres/parametresSlice.js'
 
-import {Checkbox, Box, FormGroup, FormControlLabel, Paper} from '@mui/material';
+import {Checkbox, Box, FormGroup, FormControlLabel, Paper, Button} from '@mui/material';
 
 export function Parametres() {
   const parametres = useSelector((state) => state.parametres)
@@ -18,35 +18,54 @@ export function Parametres() {
   };
   
   return(
-    <div className='parametres'>
-      <Paper className='sourcesParam'
-        sx={{
-          backgroundColor: "secondary"
+    <div >
+      <Box
+        className='parametres'
+        sx={{ 
+          // border: 1,
+          display: 'flex',
+          flexDirection: 'row',
+          height: '50px'
         }}
       >
-        <FormGroup
-        className='sourcesFormGroup'
-        sx={{
-          flexDirection: 'row'
-        }}
+        <Paper className='sourcesParam'
+          sx={{
+            backgroundColor: "color1",
+          }}
         >
-          {Object.values(parametres).map((element)=> 
-            <FormControlLabel
-            key={element.name+'ParametresFormcontrol'}
-              label={element.label}
-              className='sourcesFormControlLabel'
-              control={
-                <Checkbox
-                  className='sourcesCheckbox'
-                  id={element.name}
-                  checked={element.checked}
-                  onChange={handleCheckbox}
-                />
-              }
-            />
-          )}
-        </FormGroup>
-      </Paper>
+          <FormGroup
+          className='sourcesFormGroup'
+          sx={{
+            flexDirection: 'row'
+          }}
+          >
+            {Object.values(parametres).map((element)=> 
+              <FormControlLabel
+              key={element.name+'ParametresFormcontrol'}
+                label={element.label}
+                className='sourcesFormControlLabel'
+                control={
+                  <Checkbox
+                    defaultChecked color="secondary"
+                    className='sourcesCheckbox'
+                    id={element.name}
+                    checked={element.checked}
+                    onChange={handleCheckbox}
+                  />
+                }
+              />
+            )}
+          </FormGroup>
+        </Paper>
+        <Box 
+          sx={{
+            display: 'flex',
+            flexDirection: 'column'
+          }}
+        >
+          {/* <Button sx={{height: '25px', width: '25px'}} variant="contained" color='secondary'>a</Button> */}
+        </Box>
+      </Box>
     </div>
   )
 }

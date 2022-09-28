@@ -7,7 +7,7 @@
 
 .displayContent{
   max-height: calc(100vh - 100px);
-  overflow-x: hidden;
+  // overflow-x: hidden;
   overflow-y: auto;
   border-left: 1px white;
 }
@@ -47,23 +47,32 @@
   /* background-color: yellowgreen; */
   padding-left: 15px;
   padding-top: 5px;
-  padding-bottom: 5px;
+  // padding-bottom: 5px;
+}
+
+.defSynonyms {
+  /* background-color: yellowgreen; */
+  padding-left: 15px;
+  padding-top: 5px;
+  // padding-bottom: 5px;
 }
 
 .defBlock {
   display: flex;
   flex-direction: column;
+  height: fit-content;
 }
+
 
 /* .defAut{
   margin-right: 100px;
   background-color: aqua;
 } */
 
-.autAndRate{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+// .autAndRate{
+//   display: flex;
+//   flex-direction: row;
+//   // justify-content: space-between;
+// }
 
 a { color: inherit; } 

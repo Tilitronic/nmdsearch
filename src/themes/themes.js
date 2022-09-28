@@ -1,31 +1,50 @@
 import { AppBar, Typography } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
+const black = '#000000'
+const white = '#ffffff'
+const maroon = '#800000'
+const cyanBlue = '#003480'
+const electricYellow = '#ffff33'
+const magenda = '#ff33ff'
+const cyan = '#33ffff'
+const mediumGreen = '#008026'
+const greyscale = '#404040'
+const invMaroon= '#7fffff'
+const babyPowder = '#fefefa'
+
 export const mainTheme = createTheme({
     palette: {
         type: 'dark',
-        common: {
-          black: '#000',
-          white: '#fff'
-        },
+        // common: {
+        //   black: '#000',
+        //   white: '#fff'
+        // },
         primary: {
-          main: '#FB8B24',
-          contrastText: '#fff'
+          main: electricYellow,
+          contrastText: black,
         },
         secondary: {
-          main: '#9A031E',
-          contrastText: '#fff'
+          main: magenda,
+          contrastText: black
         },
         background: {
-          default: '#000000',
-          paper: '#0F4C5C',
+          default: black,
+          paper: greyscale,
         },
         divider: '#fff',
-        color1: '#533463',
+        color1: '#0a0a0a',
+        color2: mediumGreen,
+        black: black,
+        white: babyPowder,
+        synBBC: electricYellow,
+        defBBC: magenda,
+        exampBBC: cyan,
+        bodyBBC: white,
         text: {
-          primary:'#fff',
-          secondary: '#76ff03',//yellow
-          disabled: '#76ff03'//green
+          primary: babyPowder,
+          secondary: cyan,//yellow
+          disabled: greyscale//green
         },
         // action: {
         //   active: rgba(0, 0, 0, 0.54),
@@ -56,38 +75,88 @@ export const mainTheme = createTheme({
         borderRadius: 0,
       },  
       components:{
-        MuiTextField: {
-          styleOverrides:{
-            root: {
-              backgroundColor: '#78002e',//pink
-              border: '#fff 1px',
-              color: '#fff'
-            }
-          }
-        },
+        // MuiTextField: {
+        //   styleOverrides:{
+        //     root: {
+        //       backgroundColor: black,
+        //       border: '#fff 1px',
+        //       color: babyPowder
+        //     }
+        //   }
+        // },
         MuiAppBar: {
           styleOverrides:{
             root: {
-              backgroundColor: '#000',
-              border: '#fff 1px',
+              backgroundColor: black,
+              border: '#ffffff 3px',
               color: '#fff'
             }
         }
       },
-      MuiPaper: {
-        styleOverrides: {
-          root: {
-            // backgroundColor: '#0000',
-          }
+        MuiAccordion: {
+          styleOverrides:{
+            root: {
+              backgroundColor: black,
+              border: '1px',
+              width: '70%',
+            },
+            
         }
-      }
+      },
+        MuiCheckbox:{
+          styleOverrides:{
+            // root: {
+            //   color: electricYellow,  
+            // },
+            colorPrimary: {
+              color: magenda,  
+            },
+            colorSecondary: {
+              color: electricYellow,  
+            },
+
+        }
+      },
+
+        MuiPaper: {
+          styleOverrides: {
+            root: {
+              // backgroundColor: greyscale,
+              border: '3px',
+              color: '#fff'
+            }
+          }
+        },
+        // MuiTextField: {
+        //   styleOverrides: {
+        //     root: {
+
+        //     }
+        //   }
+        // },
+        // MuiFilledInput: {
+        //   styleOverrides: {
+        //     root: {
+        //       border: '1px solid #000000',
+        //       backgroundColor: '#000000'          
+        //     },
+        //     hover: {
+        //       backgroundColor: '#000000'
+        //     },
+        //     focused: {
+        //       backgroundColor: '#000000'
+
+        //     }
+        //   }
+        // },
     },
       typography: {
-        subtitle2: {
-          backgroundColor: '#9A031E',
-          color: '#fff',
+        displayColName: {
+          backgroundColor: black,
+          color: cyan,
           fontSize: '0.9rem',
-          lineHeight: '0.95',
+          lineHeight: '0.90',
+          fontWeight: 700
         },
         defBody: {
           backgroundColor: '#0000',
@@ -103,7 +172,7 @@ export const mainTheme = createTheme({
           backgroundColor: '#0000',
           color: '#DBD8E3',
           fontSize: '0.9rem',
-          lineHeight: '0.95',
+          lineHeight: '1.1rem',
         },
         defAut: {
           backgroundColor: '#0000',
@@ -114,7 +183,12 @@ export const mainTheme = createTheme({
           backgroundColor: '#0000',
           color: '#03C4A1',
           fontSize: '0.7rem'
-        }
+        },
+        synonymsHead: {
+          backgroundColor: '#0000',
+          color: electricYellow,
+          fontSize: '0.8rem'
+        },
 
       }
 })

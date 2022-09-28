@@ -34,31 +34,32 @@ export function Home(){
     const dictsParam = useSelector((state)=>state.parametres);
 
     const displayElements=Object.values(dictsParam).map((element)=>{
-      if(!element.checked){
-        return
-      }
-      let sourceElement
-      switch (element.name) {
-        case 'urban':
-          sourceElement = <ShowUrbanDictDef/>
-          break;
-        case 'wordnet':
-          sourceElement = <ShowWordnet/>
-          break;
-        case 'wordnik':
-          sourceElement = <ShowWordnik/>
-          break;
-        case 'babelnet':
-          sourceElement = <ShowBabelnet/>
-          break;
-        default:
-          return;
-      }
-      return (
-        <Display name={element.label}>
-          {sourceElement}
-        </Display>
+      if(element.checked && dictsState[element.name]){
+        let sourceElement
+        switch (element.name) {
+          case 'urban':
+            sourceElement = <ShowUrbanDictDef/>
+            break;
+          case 'wordnet':
+            sourceElement = <ShowWordnet/>
+            break;
+          case 'wordnik':
+            sourceElement = <ShowWordnik/>
+            break;
+          case 'babelnet':
+            sourceElement = <ShowBabelnet/>
+            break;
+          default:
+            return;
+        }
+        return (
+          <Display name={element.label}>
+            {sourceElement}
+          </Display>
       )
+      }
+      else{return}
+      
   
     })
   
