@@ -5,18 +5,38 @@ import { nanoid } from 'nanoid';
 import xml2js from "xml2js";
 const xmlparser = new xml2js.Parser();
 
-import {Typography } from '@mui/material';
+import { TextResultUnit } from './TextResultUnit/TextResultUnit';
+
+
+import {Typography, Box } from '@mui/material';
+
 
 function makeALink(phrase, link){
     return `<a href='${link}' target='_blank' rel='noreferrer noopener'>${phrase}</a>`
 }
-function sortDefinitions (origins, definitions){
+function sortDefenitionsBySource (origins, definitions){
     for (let def of definitions){
         for(let origin of origins){
             if(def.sourceDictionary===origin.id && def.text){
                 origin.definitions.push(def)
             }
         }
+    }
+}
+
+function sortDefinitionsByPartOfSpeach(data){
+    for(let source of data){
+        const typesOfDefs = source.definitions.map((item)=>{return({id: item.word+'_'+item.partOfSpeech, word: item.word, partOfSpeech: item.partOfSpeech, url: item.wordnikUrl, sourceDictionary: item.sourceDictionary, definitions: []})})
+        const uniqueTypesOfDefs = [...new Map(typesOfDefs.map((item) => [item["id"], item])).values()]
+        // console.log("uniqueTypesOfDefs", uniqueTypesOfDefs);
+        for (let def of source.definitions){
+            for(let defType of uniqueTypesOfDefs){
+                if (def.word+'_'+def.partOfSpeech===defType.id){
+                    defType.definitions.push(def)
+                }
+            }
+        }
+        source.typesOfDefinitions.push(...uniqueTypesOfDefs)
     }
 }
 
@@ -27,50 +47,117 @@ function Definitions(){
     }
     const defData = useSelector((state)=>state.dicts.wordnik.definitions)
 
-    const defOrigins = defData.map((obj)=>{return({name: obj.attributionText, source: obj.sourceDictionary, url: obj.attributionUrl, id: obj.sourceDictionary, definitions: []})})
+    const defOrigins = defData.map((obj)=>{return({name: obj.attributionText, source: obj.sourceDictionary, url: obj.attributionUrl, id: obj.sourceDictionary, definitions: [], typesOfDefinitions: []})})
     console.log("defOrigins", defOrigins);
     const uniqDefOrigins = [...new Map(defOrigins.map((item) => [item["id"], item])).values()];
     console.log("uniqDefOrigins", uniqDefOrigins);
-    sortDefinitions(uniqDefOrigins, defData)
+    sortDefenitionsBySource(uniqDefOrigins, defData)
+    const testdata = [...uniqDefOrigins]
+    sortDefinitionsByPartOfSpeach(testdata)
+
 
     const reactElementsAr = uniqDefOrigins.map((origin, index)=>{
         const originTitle = origin.name
-        const originLink = makeALink(origin.name, origin.url)
-        const definitionsAr = origin.definitions.map((obj, index)=>{
-            const word = makeALink(obj.word, obj.wordnikUrl)
-            const attribution = makeALink(obj.attributionText, obj.attributionUrl)
-            const xmlDefText = obj.text
-            // console.log("xmlDefText", xmlDefText);
-            const n1text = xmlDefText.replaceAll('xref', 'span')
-            const n2text = n1text.replaceAll('spn', 'span')
-            // console.log("n1text", n2text);
-            // const parsedText = xmlparser.parseString(
-            //     xmlDefText, function(err, result) {
-            //         result
-            //     })
-            // console.log("parsedText", parsedText);
-            const partOfSpeech = obj.partOfSpeech
+        const originLink = makeALink(originTitle, origin.url)
+        const definitionsElements = origin.typesOfDefinitions.map(typeOfDef=>{
+            const defRawTitle = typeOfDef.word+' ('+typeOfDef.partOfSpeech+')'
+            const defTitle = makeALink(defRawTitle, typeOfDef.url)
+
+            const definitionsAr = typeOfDef.definitions.map((obj, index)=>{
+                const word = makeALink(obj.word, obj.wordnikUrl)
+                const attribution = makeALink(obj.attributionText, obj.attributionUrl)
+                const xmlDefText = obj.text
+                // console.log("xmlDefText", xmlDefText);
+                const n1text = xmlDefText.replaceAll('xref', 'span')
+                const n2text = n1text.replaceAll('spn', 'span')
+                // console.log("n1text", n2text);
+                // const parsedText = xmlparser.parseString(
+                //     xmlDefText, function(err, result) {
+                //         result
+                //     })
+                // console.log("parsedText", parsedText);
+                const partOfSpeech = obj.partOfSpeech
+                return(
+                    <Box 
+                        key={obj.id ? obj.id : "wordnikDef"+obj.sourceDictionary+index}
+                        // className='defBody'
+                        sx={{
+                            paddingLeft: '7px',
+                        }}
+                    >
+                        <Box className='defBody'>
+                            <Typography variant='defBody'>
+                                {index+1+'. '+parse(n2text)}
+                            </Typography >
+                        </Box>
+                    </Box>
+                )})
+            
             return(
-                <div className='defBlock' key={obj.id ? obj.id : "wordnetDef"+obj.sourceDictionary+index}>
-                    
-                    <Typography  variant='defHead' className='defHead'>{parse(word)} {partOfSpeech ? '('+partOfSpeech+')' : null}</Typography >
-                    <Typography variant='defBody' className='defBody'>{
-                    parse(n2text)
-                    }</Typography >
-                    {/* <div>{parse(attribution)}</div> */}
-                </div>
+                <TextResultUnit
+                    color="white"
+                    type='1'
+                    expanded={true}
+                    head={
+                        <Box className='defHead'>
+                            <Typography variant="defHead">
+                                {parse(defTitle)}
+                            </Typography>
+                        </Box>
+                    }
+                >
+                    {definitionsAr}
+                </TextResultUnit>
             )
         })
+        // const definitionsAr = origin.definitions.map((obj, index)=>{
+        //     const word = makeALink(obj.word, obj.wordnikUrl)
+        //     const attribution = makeALink(obj.attributionText, obj.attributionUrl)
+        //     const xmlDefText = obj.text
+        //     // console.log("xmlDefText", xmlDefText);
+        //     const n1text = xmlDefText.replaceAll('xref', 'span')
+        //     const n2text = n1text.replaceAll('spn', 'span')
+        //     // console.log("n1text", n2text);
+        //     // const parsedText = xmlparser.parseString(
+        //     //     xmlDefText, function(err, result) {
+        //     //         result
+        //     //     })
+        //     // console.log("parsedText", parsedText);
+        //     const partOfSpeech = obj.partOfSpeech
+        //     return(
+        //         <Box 
+        //             key={obj.id ? obj.id : "wordnetDef"+obj.sourceDictionary+index}
+        //             // className='defBody'
+        //             sx={{
+        //                 paddingLeft: '7px',
+        //             }}
+        //         >
+        //             <Box className='defHead'>
+        //                 <Typography  variant='defHead'>
+        //                         {parse(word)} {partOfSpeech ? '('+partOfSpeech+')' : null}
+        //                 </Typography >
+        //             </Box>
+        //             <Box className='defBody'>
+        //                 <Typography variant='defBody'>
+        //                     {parse(n2text)}
+        //                 </Typography >
+        //             </Box>
+        //         </Box>
+        //     )})
         if(origin.source!=='wordnet'){
             return (
-                <div key={'wordnikDef'+origin.url} className='dictName'>   
-                    <div>
-                        {parse(originLink)}
-                    </div>
+                <TextResultUnit
+                    key={'wordnikDef'+origin.url}
+                    color='white'
+                    className='dictBody'
+                    head={parse(originLink)}
+                    type='1'
+                    expanded={true}
+                > 
                     <div className="definitions">
-                        {definitionsAr}
+                        {definitionsElements}
                     </div>
-                </div>
+                </TextResultUnit>
                 
             )
         }
@@ -83,10 +170,7 @@ function Definitions(){
         return(
             <div>
                 {reactElementsAr}
-            </div>
-                
-
-            
+            </div> 
         )
 }
 
