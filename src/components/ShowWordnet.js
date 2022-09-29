@@ -88,8 +88,9 @@ export function ShowWordnet(){
                     //     borderLeft: 5,
                     //     borderColor: 'defBBC'
                     // }}
+                    className='defBody'
                 >
-                    <Typography  variant='defBody' className='defBody'>
+                    <Typography  variant='defBody' >
                         {obj.def}
                     </Typography>
                 </Box>

@@ -66,7 +66,10 @@ export function TextResultUnit({children, head='Head nor provided', type='1', ex
           sx={{
             borderLeft: borderLeft,
             borderColor: color, //should depend on content
-            height: height,
+            minHeight: height,
+            maxHeight: `calc(${height}+1px)`,
+            padding: 0,
+            paddingLeft: '7px',
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'start',
