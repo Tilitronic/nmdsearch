@@ -87,8 +87,9 @@ export function ShowUrbanDictDef () {
                 justifyContent: 'space-between'
               }}
             >
-              <Typography variant='defAut' className='defAut' align='right'>{'by '+obj.author}{time}</Typography >
-              <Typography variant='defRate' align='right'>{obj.thumbs_up}/{obj.thumbs_down}</Typography >
+              <Typography variant='defAut' className='defAut' align='right'>{'by '+obj.author+' '+time+'; rating: '+obj.thumbs_up+'/'+obj.thumbs_down}</Typography >
+              {/* <Typography variant='defRate' align='right'>{obj.thumbs_up}/{obj.thumbs_down}</Typography >
+              <div></div> */}
             </Box>
           </Box>
         </TextResultUnit>
