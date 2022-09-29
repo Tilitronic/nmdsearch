@@ -148,7 +148,7 @@ function Definitions(){
             return (
                 <TextResultUnit
                     key={'wordnikDef'+origin.url}
-                    color='white'
+                    // color='white'
                     className='dictBody'
                     head={parse(originLink)}
                     type='1'

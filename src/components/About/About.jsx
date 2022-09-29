@@ -24,6 +24,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { pageData } from '../../data/about.js';
 import { Link } from '@mui/material';
 
+import parse from 'html-react-parser';
+
 const drawerWidth = 250;
 
 const navigationTitles = pageData.map((element, index)=>{
@@ -55,7 +57,7 @@ const textContent=pageData.map((element, index)=>{
       </Typography>
       {element.text && 
         <Typography paragraph>
-          {element.text}
+          {parse(element.text)}
         </Typography>
       }
       {element.elements &&

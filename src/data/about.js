@@ -1,4 +1,8 @@
 import { Sources } from "../components/Sources.js"
+import parse from 'html-react-parser';
+function makeALink(phrase, link){
+    return `<a href='${link}' target='_blank' rel='noreferrer noopener'>${phrase}</a>`
+}
 
 const introText = `
 The MDSearch page was created primarily to search for the meaning of 
@@ -6,8 +10,18 @@ an English word in several sources at once. When I watched cartoons or
 read books in English and looked for definitions of unfamiliar words, 
 I often found myself having to look up the word in several places because 
 the first place provided unclear definition, definition that don't fit or 
-no definition at all. It annoyed me!
+no definition at all. It annoyed me! So looking for ideas for my learning 
+project in React I finally came up with this page.
 `
+
+const github = makeALink('GitHub', 'https://github.com/Tilitronic/nmdsearch')
+const technologiesText = `The web page is built with React library. 
+Global state managing realized with React Redux and routing with 
+React Router libraries. User managing and some APIs functional are 
+realized with the backend written in Node.js. For storing user's 
+data the page is using Mongo database (free plane). Styling, 
+for now, is done with Material UI library. The frontend is hosted 
+for free on Netlify and backend — on Heroku. The code is available on my ${github}.`
 
 export const pageData = [
     {
@@ -20,14 +34,14 @@ export const pageData = [
     },
     {
         header: 'Technologies',
-        text: 'The web page is build using JS with React frontend library. Some APIs functional and user managing is realised with backend writed on Node.js. For storing logged users data the page is using Mongo database free plane. Styling for now is realised with Material UI library. Frontend is hosted for free on XXX and backend — on heroku. The whole code is avaliable on my github.'
+        text: technologiesText
     },
     {
         header: 'Contact',
-        text: 'You can contact mi with mail'
+        text: 'You can contact me via e-mail:<br/>mdsearch.m1nkl@aleeas.com'
     },
     {
         header: 'License',
-        text: 'The whole thing is coverd with MIT license wich you are agreed with using the web page services.'
+        text: 'The MDSearch page is covered by GNU General Public License v3 or any later version.'
     }
   ]

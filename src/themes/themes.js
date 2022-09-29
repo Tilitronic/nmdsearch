@@ -164,7 +164,7 @@ export const mainTheme = createTheme({
         },
         defHead: {
           backgroundColor: '#0000',
-          color: '#0F4C5C',
+          color: magenda,
           fontSize: '1.2rem',
           fontWeight: 500
         },
