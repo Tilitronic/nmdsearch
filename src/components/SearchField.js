@@ -110,7 +110,7 @@ export function SearchField (props){
             setSug([]);
             dispatch(resetDictsStore())
             if (location.pathname!=='/') {
-                navigate('/', { replace: true })
+                navigate('/', { replace: false })
             }
 
             saveWordToDB(opWord);

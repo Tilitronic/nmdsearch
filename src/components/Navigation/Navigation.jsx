@@ -41,7 +41,7 @@ export function Navigation() {
   }, [location])
 
   function navigateTo(location){
-    navigate(location, { replace: true })
+    navigate(location, { replace: false })
   }
 
   const locationsElements = function(){
