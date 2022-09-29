@@ -1,3 +1,8 @@
-/about  /md-search.netlify.app/about
 
-/   /md-search.netlify.app
+[[redirects]]
+  from = "/about"
+  to = "/md-search.netlify.app/about"
+
+[[redirects]]
+  from = "/"
+  to = "/md-search.netlify.app"
