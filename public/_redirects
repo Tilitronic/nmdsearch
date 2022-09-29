@@ -1,8 +1,8 @@
-
-[[redirects]]
+/* /index.html 200
+<!-- [[redirects]]
   from = "/about"
   to = "/md-search.netlify.app/about"
 
 [[redirects]]
   from = "/"
-  to = "/md-search.netlify.app"
+  to = "/md-search.netlify.app" -->
