@@ -22,7 +22,7 @@ export function Display({children, name}) {
           align='center'
           className='displayBarTypography'
         >{name}</Typography>
-        <div className='displayBarButtons'>
+        {/* <div className='displayBarButtons'>
           <Checkbox/>
           <IconButton>
             <CloseIcon/>
@@ -30,7 +30,7 @@ export function Display({children, name}) {
           <IconButton>
             <ExpandMoreIcon/>
           </IconButton> 
-        </div>
+        </div> */}
         
       </Box>
       <Box className='displayContent'
