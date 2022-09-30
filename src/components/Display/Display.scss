@@ -5,20 +5,22 @@
 
 }
 
+.displayBar {
+  /* background-color: rgb(221, 165, 132); */
+  width: max;
+  display: flex;
+  height: 30px;
+  justify-content: space-between;
+}
+
 .displayContent{
   max-height: calc(100vh - 100px);
   // overflow-x: hidden;
   overflow-y: auto;
   border-left: 1px white;
+
 }
 
-.displayBar {
-    /* background-color: rgb(221, 165, 132); */
-    width: max;
-    display: flex;
-    height: 30px;
-    justify-content: space-between;
-}
 
 .displayBarButtons{
   display: flex;
@@ -76,3 +78,24 @@
 // }
 
 a { color: inherit; } 
+
+// Firefox scrollbar styling
+*{
+  scrollbar-color: #FFFF33  rgb(10, 10, 10);
+  scrollbar-width: thin;
+}
+
+// Chrome scrollbar styling
+*::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+  background: rgb(10, 10, 10);        /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(255, 255, 51);    /* color of the scroll thumb */
+  border-radius: 0x;       /* roundness of the scroll thumb */
+  // border: 1px solid rgb(10, 10, 10);  /* creates padding around scroll thumb */
+}
