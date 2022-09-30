@@ -47,6 +47,7 @@ export function ShowUrbanDictDef () {
       const time=rawTime1[2]+'.'+rawTime1[1]+'.'+rawTime1[0]
       return(  
         <TextResultUnit 
+          key={'urbandef'+obj.defid}
           head={
           <Typography  variant='defHead' className='defHead'>
             {makeALink(obj.word,obj.permalink)}

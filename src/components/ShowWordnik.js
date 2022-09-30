@@ -95,6 +95,7 @@ function Definitions(){
             
             return(
                 <TextResultUnit
+                    key={'wordnikDefType'+typeOfDef.id}
                     color="white"
                     type='1'
                     expanded={true}
@@ -147,7 +148,7 @@ function Definitions(){
         if(origin.source!=='wordnet'){
             return (
                 <TextResultUnit
-                    key={'wordnikDef'+origin.url}
+                    key={'wordnikSource'+origin.url}
                     // color='white'
                     className='dictBody'
                     head={parse(originLink)}
