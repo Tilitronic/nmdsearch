@@ -70,15 +70,18 @@ export function ShowUrbanDictDef () {
             >
               {parse(definition)}
             </Typography >
-            <TextResultUnit 
+            {obj.example.length>0 &&
+              <TextResultUnit 
               className='defExamples'
               head='Examples'
               color='exampBBC' 
               expanded={true} 
               type='2'
-            >
+              >
                 <Typography variant='defExamples' >{parse(example)}</Typography >
-            </TextResultUnit>
+              </TextResultUnit>
+            }
+            
 
             <Box className='autAndRate'
               sx={{

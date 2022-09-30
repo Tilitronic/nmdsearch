@@ -3,7 +3,7 @@ import {
   Routes, Route, Link
 } from "react-router-dom"
 import { useState, useRef, useEffect } from 'react';
-import styles from './index.css'
+import styles from './index.scss'
 
 //redux store
 import { useSelector, useDispatch } from 'react-redux';

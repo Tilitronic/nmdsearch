@@ -1,0 +1,39 @@
+.buy-container {
+  overflow-y: hidden;
+  width: 100vw;
+}
+
+.MuiContainer-root {
+  width: 100%;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0;
+
+}
+.css-1oqqzyl-MuiContainer-root{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// Firefox scrollbar styling
+*{
+  scrollbar-color: rgb(27, 27, 27)  rgb(1, 1, 1);
+  scrollbar-width: thin;
+}
+
+// Chrome scrollbar styling
+*::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+  background: rgb(1, 1, 1);        /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(27, 27, 27);    /* color of the scroll thumb */
+  border-radius: 0x;       /* roundness of the scroll thumb */
+  // border: 1px solid rgb(10, 10, 10);  /* creates padding around scroll thumb */
+}

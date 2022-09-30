@@ -1,7 +1,8 @@
 import { AppBar, Typography } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const black = '#000000'
+const black = '#010101'
+const grey = '#1b1b1b'
 const white = '#ffffff'
 const maroon = '#800000'
 const cyanBlue = '#003480'
@@ -33,7 +34,7 @@ export const mainTheme = createTheme({
           paper: greyscale,
         },
         divider: '#fff',
-        color1: '#0a0a0a',
+        color1: grey,
         color2: mediumGreen,
         black: black,
         white: babyPowder,

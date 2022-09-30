@@ -79,23 +79,3 @@
 
 a { color: inherit; } 
 
-// Firefox scrollbar styling
-*{
-  scrollbar-color: #FFFF33  rgb(10, 10, 10);
-  scrollbar-width: thin;
-}
-
-// Chrome scrollbar styling
-*::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
-}
-
-*::-webkit-scrollbar-track {
-  background: rgb(10, 10, 10);        /* color of the tracking area */
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: rgb(255, 255, 51);    /* color of the scroll thumb */
-  border-radius: 0x;       /* roundness of the scroll thumb */
-  // border: 1px solid rgb(10, 10, 10);  /* creates padding around scroll thumb */
-}
