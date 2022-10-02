@@ -25,7 +25,7 @@ initialState: {
             definition: true,
             pronunciations: true,
             audio: true,
-            examples: true,
+            examples: false,
         } 
     },
     babelnet: {

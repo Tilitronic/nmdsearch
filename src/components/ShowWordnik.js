@@ -112,24 +112,25 @@ function Prononuc(){
     if(!data?.pronunciations){
         return
     }
-    const pronData = useSelector((state)=>state.dicts.wordnik.pronunciations)
-
-        const pronunciations = pronData.map((obj, index)=>{
-            if(obj.rawType==='IPA'){
-
-        return(
-            <div key={'wordnikIpa'+index}>{obj.raw}</div>
-        )}})
-        console.log("pronunciations", pronunciations);
-        if(pronunciations){
-            return(
-                <div>
-                    {pronunciations}
-                </div>
-            )
+    function handleClick(url){
+        if (window.event.ctrlKey) {
+            window.open(url, '_blank');
+            return
         }
-        return null
-
+    }
+    const pronData = useSelector((state)=>state.dicts.wordnik.pronunciations)
+    function getIpa(ar){
+        for(let obj of ar){
+            if(obj.rawType==='IPA'){
+                return obj
+            }
+        }
+    }
+    const ipa = getIpa(pronData)
+    if (!ipa?.raw){return}
+    return(
+        <div title={ipa.attributionText+' Ctrl+click to see license'} onClick={()=>handleClick(ipa.attributionUrl)}>{ipa.raw}</div>
+    )
 }
 
 function Audio (){
@@ -139,7 +140,6 @@ function Audio (){
         const fileUrl = obj.fileUrl
         function handleClick(id, url){
             if (window.event.ctrlKey) {
-                console.log("url", url);
                 window.open(url, '_blank');
                 return
             }
@@ -149,7 +149,7 @@ function Audio (){
         return(
             <div key={obj.id}>
                 <IconButton  
-                    title={obj.attributionText+'. Ctrl+click to see original source'}
+                    title={obj.attributionText.replaceAll('--', '—')+'. Ctrl+click to see original source'}
                     onClick={()=>handleClick(obj.id, obj.attributionUrl)}
                     
                 >
