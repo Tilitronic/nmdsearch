@@ -12,6 +12,43 @@ const audio = `/audio?useCanonical=${useCanonical}&limit=50&api_key=${key}`
 const examples = `/examples?includeDuplicates=false&useCanonical=${useCanonical}&limit=10&api_key=${key}`
 const pronunciations = `/pronunciations?useCanonical=${useCanonical}&typeFormat=IPA&limit=50&api_key=${key}`
 
+
+
+function processData(data){
+    let definitions = data.definitions
+    function sortDefenitionsBySource (origins, definitions){
+        for (let def of definitions){
+            for(let origin of origins){
+                if(def.sourceDictionary===origin.id && def.text){
+                    origin.definitions.push(def)
+                }
+            }
+        }
+    }
+    
+    function sortDefinitionsByPartOfSpeach(data){
+        for(let source of data){
+            const typesOfDefs = source.definitions.map((item)=>{return({id: item.word+'_'+item.partOfSpeech, word: item.word, partOfSpeech: item.partOfSpeech, url: item.wordnikUrl, sourceDictionary: item.sourceDictionary, definitions: []})})
+            const uniqueTypesOfDefs = [...new Map(typesOfDefs.map((item) => [item["id"], item])).values()]
+            // console.log("uniqueTypesOfDefs", uniqueTypesOfDefs);
+            for (let def of source.definitions){
+                for(let defType of uniqueTypesOfDefs){
+                    if (def.word+'_'+def.partOfSpeech===defType.id){
+                        defType.definitions.push(def)
+                    }
+                }
+            }
+            source.typesOfDefinitions.push(...uniqueTypesOfDefs)
+        }
+    }
+    const defOrigins = definitions.map((obj)=>{return({name: obj.attributionText, source: obj.sourceDictionary, url: obj.attributionUrl, id: obj.sourceDictionary, definitions: [], typesOfDefinitions: []})})
+    const uniqDefOrigins = [...new Map(defOrigins.map((item) => [item["id"], item])).values()];
+    sortDefenitionsBySource(uniqDefOrigins, definitions)
+    sortDefinitionsByPartOfSpeach(uniqDefOrigins)
+
+    return {audio: data.audio, examples: data.examples, pronunciations: data.pronunciations, definitions: uniqDefOrigins}
+}
+
 export async function getWordnikData (word){
     const parametres = store.getState().parametres.wordnik.parametres
     console.log("wordnik parametres", parametres);
@@ -68,6 +105,7 @@ export async function getWordnikData (word){
         };
     }
     console.log("Wordnik data from response:", data);
-    return data
+
+    return processData(data)
 
 }

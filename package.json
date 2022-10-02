@@ -28,6 +28,7 @@
     "web-vitals": "^2.1.4",
     "xml2js": "^0.4.23"
   },
+  "license": "GNU General Public License v3",
   "scripts": {
     "start": "react-scripts start",
     "build": "CI=false && react-scripts build",

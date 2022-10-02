@@ -8,36 +8,11 @@ const xmlparser = new xml2js.Parser();
 import { TextResultUnit } from './TextResultUnit/TextResultUnit';
 
 
-import {Typography, Box } from '@mui/material';
-
+import {Typography, Box, Button, IconButton } from '@mui/material';
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
 function makeALink(phrase, link){
     return `<a href='${link}' target='_blank' rel='noreferrer noopener'>${phrase}</a>`
-}
-function sortDefenitionsBySource (origins, definitions){
-    for (let def of definitions){
-        for(let origin of origins){
-            if(def.sourceDictionary===origin.id && def.text){
-                origin.definitions.push(def)
-            }
-        }
-    }
-}
-
-function sortDefinitionsByPartOfSpeach(data){
-    for(let source of data){
-        const typesOfDefs = source.definitions.map((item)=>{return({id: item.word+'_'+item.partOfSpeech, word: item.word, partOfSpeech: item.partOfSpeech, url: item.wordnikUrl, sourceDictionary: item.sourceDictionary, definitions: []})})
-        const uniqueTypesOfDefs = [...new Map(typesOfDefs.map((item) => [item["id"], item])).values()]
-        // console.log("uniqueTypesOfDefs", uniqueTypesOfDefs);
-        for (let def of source.definitions){
-            for(let defType of uniqueTypesOfDefs){
-                if (def.word+'_'+def.partOfSpeech===defType.id){
-                    defType.definitions.push(def)
-                }
-            }
-        }
-        source.typesOfDefinitions.push(...uniqueTypesOfDefs)
-    }
 }
 
 function Definitions(){
@@ -47,16 +22,7 @@ function Definitions(){
     }
     const defData = useSelector((state)=>state.dicts.wordnik.definitions)
 
-    const defOrigins = defData.map((obj)=>{return({name: obj.attributionText, source: obj.sourceDictionary, url: obj.attributionUrl, id: obj.sourceDictionary, definitions: [], typesOfDefinitions: []})})
-    console.log("defOrigins", defOrigins);
-    const uniqDefOrigins = [...new Map(defOrigins.map((item) => [item["id"], item])).values()];
-    console.log("uniqDefOrigins", uniqDefOrigins);
-    sortDefenitionsBySource(uniqDefOrigins, defData)
-    const testdata = [...uniqDefOrigins]
-    sortDefinitionsByPartOfSpeach(testdata)
-
-
-    const reactElementsAr = uniqDefOrigins.map((origin, index)=>{
+    const reactElementsAr = defData.map((origin, index)=>{
         const originTitle = origin.name
         const originLink = makeALink(originTitle, origin.url)
         const definitionsElements = origin.typesOfDefinitions.map(typeOfDef=>{
@@ -111,40 +77,6 @@ function Definitions(){
                 </TextResultUnit>
             )
         })
-        // const definitionsAr = origin.definitions.map((obj, index)=>{
-        //     const word = makeALink(obj.word, obj.wordnikUrl)
-        //     const attribution = makeALink(obj.attributionText, obj.attributionUrl)
-        //     const xmlDefText = obj.text
-        //     // console.log("xmlDefText", xmlDefText);
-        //     const n1text = xmlDefText.replaceAll('xref', 'span')
-        //     const n2text = n1text.replaceAll('spn', 'span')
-        //     // console.log("n1text", n2text);
-        //     // const parsedText = xmlparser.parseString(
-        //     //     xmlDefText, function(err, result) {
-        //     //         result
-        //     //     })
-        //     // console.log("parsedText", parsedText);
-        //     const partOfSpeech = obj.partOfSpeech
-        //     return(
-        //         <Box 
-        //             key={obj.id ? obj.id : "wordnetDef"+obj.sourceDictionary+index}
-        //             // className='defBody'
-        //             sx={{
-        //                 paddingLeft: '7px',
-        //             }}
-        //         >
-        //             <Box className='defHead'>
-        //                 <Typography  variant='defHead'>
-        //                         {parse(word)} {partOfSpeech ? '('+partOfSpeech+')' : null}
-        //                 </Typography >
-        //             </Box>
-        //             <Box className='defBody'>
-        //                 <Typography variant='defBody'>
-        //                     {parse(n2text)}
-        //                 </Typography >
-        //             </Box>
-        //         </Box>
-        //     )})
         if(origin.source!=='wordnet'){
             return (
                 <TextResultUnit
@@ -200,6 +132,43 @@ function Prononuc(){
 
 }
 
+function Audio (){
+    const data = useSelector((state)=>state.dicts.wordnik)
+    if (!data.audio){return}
+    const audioElements=data.audio.map(obj=>{
+        const fileUrl = obj.fileUrl
+        function handleClick(id, url){
+            if (window.event.ctrlKey) {
+                console.log("url", url);
+                window.open(url, '_blank');
+                return
+            }
+            const audioEl = document.getElementById(id)
+            audioEl.play()
+        }
+        return(
+            <div key={obj.id}>
+                <IconButton  
+                    title={obj.attributionText+'. Ctrl+click to see original source'}
+                    onClick={()=>handleClick(obj.id, obj.attributionUrl)}
+                    
+                >
+                    <PlayCircleIcon color="iconButton"/>
+                </IconButton>
+                <audio id={obj.id}>
+                    <source src={fileUrl} type='audio/mpeg'/>
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        )
+    })
+    return(
+        <Box className="audioElements" sx={{display: 'flex', flexDirection: 'row'}}>
+            {audioElements}
+        </Box>
+    )
+}
+
 export function ShowWordnik(){
     const data = useSelector((state)=>state.dicts.wordnik)
     if(!data){
@@ -210,7 +179,11 @@ export function ShowWordnik(){
     if(data){
         return (
             <div>
-                <Prononuc/>
+                <Box sx={{display: 'flex', flexDirection: 'row', paddingLeft: '10px', alignItems: 'center'}}>
+                    <Prononuc/>
+                    <Audio/>
+                </Box>
+
                 {data.definitions && <Definitions/>}
 
             </div>

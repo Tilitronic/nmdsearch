@@ -60,7 +60,7 @@ export function SearchField (props){
     }, [])
 
     const handleWordChange = async (event)=>{
-        console.log(event.target.value);
+        // console.log(event.target.value);
         const input = event.target.value;
         if (input.substring(0,1)!==' '){
         setWord(input);
@@ -160,7 +160,7 @@ export function SearchField (props){
                 options={sug}
                 value={word}
                 
-                onChange={(event, value)=>setWord(value.word)}
+                onChange={(event, value)=>{if(!value){return} setWord(value.word)}}
                 // PopperComponent={PopperMy}
                 ListboxProps={{ style: { maxHeight: "fit-content" }, position: "bottom-start" }}
                 renderInput={(params) => {

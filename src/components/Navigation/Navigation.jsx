@@ -35,7 +35,7 @@ export function Navigation() {
     if (shouldUseEffect.current){
       const elements = locationsElements()
       setButtons(elements)
-      console.log("elements", elements);
+      // console.log("elements", elements);
     }
 
   }, [location])
@@ -49,9 +49,9 @@ export function Navigation() {
       const loc = location.pathname.replaceAll('/', '');
       const path = element.pathname.replaceAll('/', '');
       if(loc!==path){
-        console.log("location.pathname", location.pathname);
-        console.log("element.pathname", element.pathname);
-        console.log("location.pathname!==element.pathname", location.pathname!==element.pathname);
+        // console.log("location.pathname", location.pathname);
+        // console.log("element.pathname", element.pathname);
+        // console.log("location.pathname!==element.pathname", location.pathname!==element.pathname);
         return(
           <Button variant="contained" color="primary" key={element.name} onClick={()=>navigateTo(element.pathname)}>{element.name}</Button>
         )

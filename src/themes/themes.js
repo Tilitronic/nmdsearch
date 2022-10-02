@@ -33,6 +33,9 @@ export const mainTheme = createTheme({
           default: black,
           paper: greyscale,
         },
+        iconButton:{
+          main: babyPowder,
+        },
         divider: '#fff',
         color1: grey,
         color2: mediumGreen,
