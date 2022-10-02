@@ -40,7 +40,7 @@ async function getBabelNetSynsets(id){
 }
 
 export async function getBabelNetDef (word){
-    const num = 5;
+    const num = 50;
     const rawSenses = await getBabelNetSenses(word);
     const ids = rawSenses.map(sense=>sense.properties.synsetID.id);
     const idsSet = new Set(ids);
@@ -54,6 +54,56 @@ export async function getBabelNetDef (word){
             synsets.push({id: id, ...synset})
         }
     }
+    const sortedByPosSynsets = {noun: [], verb: [], adj: [], adv: [], oth: []}
+    for (let synset of synsets){
+        const pos = synset.senses[0].properties.pos  
+        switch (pos) {
+            case 'NOUN':
+                sortedByPosSynsets.noun.push(synset)
+              break;
+            case 'VERB':
+                sortedByPosSynsets.verb.push(synset)
+                break;
+            case 'ADJ':
+                sortedByPosSynsets.adj.push(synset)
+                break;
+            case 'ADV':
+                sortedByPosSynsets.adv.push(synset)
+                break;
+            case null:
+                sortedByPosSynsets.oth.push(synset)
+                break;
+            default:
+              console.log("switcher has no variants!");
+          }
+    }
+    const sortedBuSourceSynsets = {wordnet:[], wikipedia: [], wiktionary: [], wikidata: [], omegawiki: []}
+    for (let synset of synsets){
+        for (let gloss of synset.glosses){
+            const source = gloss.source  
+            switch (source) {
+                case 'WN':
+                    sortedBuSourceSynsets.wordnet.push(synset)
+                  break;
+                case 'WIKI':
+                    sortedBuSourceSynsets.wikipedia.push(synset)
+                    break;
+                case 'WIKIDATA':
+                    sortedBuSourceSynsets.wikidata.push(synset)
+                    break;
+                case 'OMWIKI':
+                    sortedBuSourceSynsets.omegawiki.push(synset)
+                    break;
+                case 'WIKT':
+                    sortedBuSourceSynsets.wiktionary.push(synset)
+                    break;
+                default:
+                  console.log("switcher has no variants!");
+              }
+        }
+    }
+    console.log("sortedSynsets", sortedByPosSynsets);
+    console.log("sortedBuSourceSynsets", sortedBuSourceSynsets);
     console.log(`The BabelNet synsets: `, synsets);
     return synsets
 }

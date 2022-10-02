@@ -17,6 +17,7 @@ function makeALink(phrase, link){
 
 function Definitions(){
     const data = useSelector((state)=>state.dicts.wordnik)
+    const parametres = useSelector(state=>state.parametres)
     if(!data?.definitions){
         return
     }
@@ -77,7 +78,8 @@ function Definitions(){
                 </TextResultUnit>
             )
         })
-        if(origin.source!=='wordnet'){
+
+        if(parametres.wordnet.checked===true && origin.source!=='wordnet'){
             return (
                 <TextResultUnit
                     key={'wordnikSource'+origin.url}
@@ -92,6 +94,22 @@ function Definitions(){
                     </div>
                 </TextResultUnit>
                 
+            )
+        }
+        else if (parametres.wordnet.checked===false){
+            return (
+                <TextResultUnit
+                    key={'wordnikSource'+origin.url}
+                    // color='white'
+                    className='dictBody'
+                    head={parse(originLink)}
+                    type='1'
+                    expanded={true}
+                > 
+                    <div className="definitions">
+                        {definitionsElements}
+                    </div>
+                </TextResultUnit>  
             )
         }
         return null
