@@ -14,30 +14,31 @@ function makeALink(phrase, link){
 function Synsets (){
     const data = useSelector((state)=>state.dicts.babelnet)
     console.log("babelnet data", data);
-    if (data){
-        const elements = useSelector((state)=>state.dicts.babelnet.list)
-        const synsets = elements.map((synset)=>{
-            const definitions = synset.glosses.map((def, index)=>{
-                return(
-                    <Typography key={'def'+def.sourceSense+index}>{index+'. '}{def.gloss}</Typography>
-                )
-            })
-            const examples = synset.examples.map((def, index)=>{
-                return(
-                    <Typography key={'example'+def.sourceSense+index}>{def.example}</Typography>
-                )
-            })
+    if (!data?.list){return}
+    const elements = useSelector((state)=>state.dicts.babelnet.list)
+    
+    const synsets = elements.map((synset)=>{
+        const definitions = synset.glosses.map((def, index)=>{
             return(
-                <div key={synset.id}>
-                    {definitions}
-                    {examples}
-                </div>
+                <Typography key={'def'+def.sourceSense+index}>{index+'. '}{def.gloss}</Typography>
             )
         })
+        const examples = synset.examples.map((def, index)=>{
+            return(
+                <Typography key={'example'+def.sourceSense+index}>{def.example}</Typography>
+            )
+        })
+        return(
+            <div key={synset.id}>
+                {definitions}
+                {examples}
+            </div>
+        )
+    })
 
         return synsets
 
-    }
+    
 
 
     return(
