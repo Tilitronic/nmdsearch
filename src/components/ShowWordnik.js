@@ -34,16 +34,8 @@ function Definitions(){
                 const word = makeALink(obj.word, obj.wordnikUrl)
                 const attribution = makeALink(obj.attributionText, obj.attributionUrl)
                 const xmlDefText = obj.text
-                // console.log("xmlDefText", xmlDefText);
-                const n1text = xmlDefText.replaceAll('xref', 'span')
-                const n2text = n1text.replaceAll('spn', 'span')
-                // console.log("n1text", n2text);
-                // const parsedText = xmlparser.parseString(
-                //     xmlDefText, function(err, result) {
-                //         result
-                //     })
-                // console.log("parsedText", parsedText);
-                const partOfSpeech = obj.partOfSpeech
+                const regexForStripHTML = /<(.|\n)*?>/ig
+                const stripText = xmlDefText.replaceAll(regexForStripHTML, '')
                 return(
                     <Box 
                         key={obj.id ? obj.id : "wordnikDef"+obj.sourceDictionary+index}
@@ -54,7 +46,7 @@ function Definitions(){
                     >
                         <Box className='defBody'>
                             <Typography variant='defBody'>
-                                {index+1+'. '+parse(n2text)}
+                                {index+1+'. '+parse(stripText)}
                             </Typography >
                         </Box>
                     </Box>
@@ -78,40 +70,25 @@ function Definitions(){
                 </TextResultUnit>
             )
         })
+        const expanded = origin.source==='wordnet' ? !parametres.wordnet.checked && !parametres.babelnet.checked : true
 
-        if(parametres.wordnet.checked===true && origin.source!=='wordnet'){
-            return (
-                <TextResultUnit
-                    key={'wordnikSource'+origin.url}
-                    // color='white'
-                    className='dictBody'
-                    head={parse(originLink)}
-                    type='1'
-                    expanded={true}
-                > 
-                    <div className="definitions">
-                        {definitionsElements}
-                    </div>
-                </TextResultUnit>
-                
-            )
-        }
-        else if (parametres.wordnet.checked===false){
-            return (
-                <TextResultUnit
-                    key={'wordnikSource'+origin.url}
-                    // color='white'
-                    className='dictBody'
-                    head={parse(originLink)}
-                    type='1'
-                    expanded={true}
-                > 
-                    <div className="definitions">
-                        {definitionsElements}
-                    </div>
-                </TextResultUnit>  
-            )
-        }
+        // if(parametres.wordnet.checked===true && origin.source!=='wordnet')
+        return (
+            <TextResultUnit
+                key={'wordnikSource'+origin.url}
+                // color='white'
+                className='dictBody'
+                head={parse(originLink)}
+                type='1'
+                expanded={expanded}
+            > 
+                <div className="definitions">
+                    {definitionsElements}
+                </div>
+            </TextResultUnit>
+            
+        )
+        
         return null
         
     })

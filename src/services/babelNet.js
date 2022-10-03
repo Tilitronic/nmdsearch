@@ -77,33 +77,36 @@ export async function getBabelNetDef (word){
               console.log("switcher has no variants!");
           }
     }
-    const sortedBuSourceSynsets = {wordnet:[], wikipedia: [], wiktionary: [], wikidata: [], omegawiki: []}
+    const sortedBySourceSynsets = {wordnet:[], wikipedia: [], wiktionary: [], wikidata: [], omegawiki: []}
     for (let synset of synsets){
         for (let gloss of synset.glosses){
             const source = gloss.source  
+            const obj = {...gloss, pos: synset.senses[0].properties.pos}
             switch (source) {
                 case 'WN':
-                    sortedBuSourceSynsets.wordnet.push(synset)
+                    sortedBySourceSynsets.wordnet.push(obj)
                   break;
                 case 'WIKI':
-                    sortedBuSourceSynsets.wikipedia.push(synset)
+                case 'WIKIDIS':
+                    sortedBySourceSynsets.wikipedia.push(obj)
                     break;
                 case 'WIKIDATA':
-                    sortedBuSourceSynsets.wikidata.push(synset)
+                    sortedBySourceSynsets.wikidata.push(obj)
                     break;
                 case 'OMWIKI':
-                    sortedBuSourceSynsets.omegawiki.push(synset)
+                    sortedBySourceSynsets.omegawiki.push(obj)
                     break;
                 case 'WIKT':
-                    sortedBuSourceSynsets.wiktionary.push(synset)
+                case 'WIKTLB':
+                    sortedBySourceSynsets.wiktionary.push(obj)
                     break;
                 default:
-                  console.log("switcher has no variants!");
+
               }
         }
     }
     console.log("sortedSynsets", sortedByPosSynsets);
-    console.log("sortedBuSourceSynsets", sortedBuSourceSynsets);
+    console.log("sortedBySourceSynsets", sortedBySourceSynsets);
     console.log(`The BabelNet synsets: `, synsets);
-    return synsets
+    return {raw: synsets, sortedBySource: sortedBySourceSynsets, sortedByPos: sortedByPosSynsets}
 }

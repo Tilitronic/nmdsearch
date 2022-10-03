@@ -19,10 +19,10 @@ function processData(data, sourceName){
                 return {list: data, dict: sourceName};
                 break;
             case 'babelnet':
-                return {list: data, dict: sourceName};
+                return {data: data, dict: sourceName};
                 break;
             case 'wordnik':
-                
+
                 return data;
                 break;
             default:
