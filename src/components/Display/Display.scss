@@ -15,7 +15,7 @@
 
 .displayContent{
   max-height: calc(100vh - 100px);
-  // overflow-x: hidden;
+  overflow-x: false;
   overflow-y: auto;
   border-left: 1px white;
 
@@ -29,7 +29,8 @@
 
 .displayBarTypography{
   /* background-color: brown; */
-  width: 70px;
+  min-width: 70px;
+  max-width: 115px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -74,6 +75,10 @@
 
 .babelnetDefSource{
   font-size: 12;
+}
+
+.italic{
+  font-style: italic;
 }
 
 /* .defAut{

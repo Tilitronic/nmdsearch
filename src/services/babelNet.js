@@ -6,7 +6,7 @@ const lang = 'en';
 const params = {
 
 }
-
+let counter = 0
 async function getBabelNetSenses(word){
     const url = `https://babelnet.io/v7/getSenses?lemma=${word}&searchLang=${lang}&key=${key}`;
     try{
@@ -40,8 +40,10 @@ async function getBabelNetSynsets(id){
 }
 
 export async function getBabelNetDef (word){
+    let counter = 0
     const num = 50;
     const rawSenses = await getBabelNetSenses(word);
+    counter+=1
     const ids = rawSenses.map(sense=>sense.properties.synsetID.id);
     const idsSet = new Set(ids);
     const uniqueIds = [...idsSet]
@@ -50,6 +52,7 @@ export async function getBabelNetDef (word){
     console.log("uniqueIds", uniqueIds);
     for (let id of uniqueIds.slice(0, num)){
         const synset = await getBabelNetSynsets(id);
+        counter+=1
         if(synset){
             synsets.push({id: id, ...synset})
         }

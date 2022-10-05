@@ -17,6 +17,7 @@ import { Togglable } from '../../components/Togglable.js';
 import {ShowUrbanDictDef} from '../../components/ShowUrbanDictDef.js';
 import { ShowWordnik } from '../ShowWordnik.js';
 import { ShowBabelnet } from '../ShowBabenet.js';
+import { ShowMeriamWebsterL,  ShowMeriamWebsterC} from '../ShowMeriam.js';
 
 
 import parse from 'html-react-parser';
@@ -48,6 +49,12 @@ export function Home(){
             break;
           case 'babelnet':
             sourceElement = <ShowBabelnet/>
+            break;
+          case 'meriamL':
+            sourceElement = <ShowMeriamWebsterL/>
+            break;
+          case 'meriamC':
+            sourceElement = <ShowMeriamWebsterC/>
             break;
           default:
             return;

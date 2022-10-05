@@ -8,6 +8,7 @@ import { getUrbanDictDef } from "./urbanDict";
 import { getWordNetData } from "./wordnet";
 import {getWordnikData} from "./wordnik";
 import {getBabelNetDef} from "./babelNet.js"
+import {getMeriamWebsterCollegiate, getMeriamWebsterLearners} from "./meriamWebster"
 
 function processData(data, sourceName){
     if (data){
@@ -22,11 +23,10 @@ function processData(data, sourceName){
                 return {data: data, dict: sourceName};
                 break;
             case 'wordnik':
-
                 return data;
                 break;
             default:
-                return data;
+                return {data: data, dict: sourceName};
         }
     }
     // else{
@@ -71,8 +71,13 @@ export function makeRequests(query){
             .then((data)=>processData(data, element.name))
             .then((data)=>store.dispatch(updateDict({dict: element.name, ...data})));
         }
-        if(element.name==='meriam'){
-            getDictData(query)
+        if(element.name==='meriamL'){
+            getMeriamWebsterLearners(query)
+            .then((data)=>processData(data, element.name))
+            .then((data)=>store.dispatch(updateDict({dict: element.name, ...data})));
+        }
+        if(element.name==='meriamC'){
+            getMeriamWebsterCollegiate(query)
             .then((data)=>processData(data, element.name))
             .then((data)=>store.dispatch(updateDict({dict: element.name, ...data})));
         }

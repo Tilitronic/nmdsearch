@@ -101,7 +101,9 @@ export function TextResultUnit({children, head='Head nor provided', type='1', ex
               sx={{
                 borderLeft: borderLeft,
                 borderColor: color, //should depend on content
-                paddingLeft: paddingLeft
+                paddingLeft: paddingLeft,
+                display: 'flex',
+                flexDirection: 'column'
               }}
             >
                 {children}

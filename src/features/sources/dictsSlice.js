@@ -18,7 +18,8 @@ initialState: {
     wiktionary: null,
     oxford: null,
     wordnik: null,
-    meriam: null,
+    meriamC: null,
+    meriamL: null,
     words: null
 
 

@@ -34,6 +34,18 @@ initialState: {
         key: nanoid(),
         checked: false,
     },
+    meriamL: {
+        label: 'Meriam-Webster Learners',
+        name: 'meriamL',
+        key: nanoid(),
+        checked: false 
+    },
+    meriamC: {
+        label: 'Meriam-Webster Collegiate',
+        name: 'meriamC',
+        key: nanoid(),
+        checked: false 
+    },
     // wiktionary: {
     //     label: 'Wiktionary',
     //     name: 'wiktionary',
@@ -52,12 +64,7 @@ initialState: {
     //     key: nanoid(),
     //     checked: false 
     // },
-    // meriam: {
-    //     label: 'Meriam-Webster',
-    //     name: 'meriam',
-    //     key: nanoid(),
-    //     checked: false 
-    // },
+
 },
 reducers: {
     toggleDictState: (state, action) => 

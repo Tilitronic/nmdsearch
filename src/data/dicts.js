@@ -21,6 +21,7 @@ const wordnikAPI = makeALink('Wordnik API', 'https://developer.wordnik.com/')
 const freePlane = makeALink('free plane', 'https://developer.wordnik.com/pricing')
 const datamuseApi = makeALink('Datamuse API', 'https://www.datamuse.com/api/')
 const babelnetApi = makeALink('BabelNet API', 'https://babelnet.org/guide')
+const meriamApi = makeALink('Merriam-Webster Dictionary API', 'https://dictionaryapi.com/') 
 
 const sourceObjAr=[
     {
@@ -57,6 +58,14 @@ const sourceObjAr=[
         from the automatic integration of Wikipedia, WordNet, Wiktionary, OmegaWiki, ImageNet
         and other resources. The MDSearch page is using free plan of ${babelnetApi} (1000 
         requests/day).`
+    },
+    {
+        name:'Meriam-Webster',
+        url:'https://www.merriam-webster.com',
+        desc: `Meriam-Webster is the oldest dictionary publisher in the United States.
+        The MDSearch page is using free ${meriamApi} (1000 requests/day) for Merriam-Webster's 
+        Collegiate Dictionary and Learners Dictionary  dictionaries. 
+        `
     },
     {
         name:'Datamuse',

@@ -4,15 +4,13 @@ function makeALink(phrase, link){
     return `<a href='${link}' target='_blank' rel='noreferrer noopener'>${phrase}</a>`
 }
 
-const introText = `
-The MDSearch page was created primarily to search for the meaning of 
+const introText = `<p>The MDSearch page as a non-commercial project was created primarily to search for the meaning of 
 an English word in several sources at once. When I watched cartoons or 
 read books in English and looked for definitions of unfamiliar words, 
 I often found myself having to look up the word in several places because 
 the first place provided unclear definition, definition that don't fit or 
 no definition at all. It annoyed me! So looking for ideas for my learning 
-project in React I finally came up with this page.
-`
+project in React I finally came up with this page.`
 
 const github = makeALink('GitHub', 'https://github.com/Tilitronic/nmdsearch')
 const technologiesText = `The web page is built with React library. 
