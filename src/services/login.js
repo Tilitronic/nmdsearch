@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const loginApi = 'api/login'
-const registerApi = '/api/users'
+const registerApi = 'api/users'
 const loginUrl= process.env.REACT_APP_LOCALHOST ? process.env.REACT_APP_LOCALHOST+loginApi : 'https://md-search.herokuapp.com/'+loginApi;
 const registerUrl= process.env.REACT_APP_LOCALHOST ? process.env.REACT_APP_LOCALHOST+registerApi : 'https://md-search.herokuapp.com/'+registerApi;
 

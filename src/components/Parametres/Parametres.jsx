@@ -5,8 +5,7 @@ import './Parametres.css';
 //redux state
 import { useSelector, useDispatch } from 'react-redux';
 import {toggleDictState} from '../../features/parametres/parametresSlice.js'
-
-import {Checkbox, Box, FormGroup, FormControlLabel, Paper, Button} from '@mui/material';
+import {Checkbox, Box, FormGroup, FormControlLabel, Paper, Button, Typography} from '@mui/material';
 
 export function Parametres() {
   const parametres = useSelector((state) => state.parametres)
@@ -25,12 +24,15 @@ export function Parametres() {
           // border: 1,
           display: 'flex',
           flexDirection: 'row',
-          height: '50px'
+          height: '50px',
+          minWidth: '470px',
+          maxWidth: '710px'
         }}
       >
         <Paper className='sourcesParam'
           sx={{
             backgroundColor: "color1",
+            
           }}
         >
           <FormGroup
@@ -42,7 +44,8 @@ export function Parametres() {
             {Object.values(parametres).map((element)=> 
               <FormControlLabel
               key={element.name+'ParametresFormcontrol'}
-                label={element.label}
+                label={<Box ><Typography variant="parametres">{element.label}</Typography></Box>}
+                
                 className='sourcesFormControlLabel'
                 control={
                   <Checkbox

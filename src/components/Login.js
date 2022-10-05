@@ -12,6 +12,8 @@ export function Login (props){
     const [isOpen, setIsOpen] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [mail, setMail] = useState('');
+    const [mode, setMode] = useState(false);
     // const [user, setUser] = useState(null);
 
     const dispatch = useDispatch()
@@ -39,8 +41,8 @@ export function Login (props){
 
     const handleRegister = async (event) =>{
         event.preventDefault();
-        console.log("Registratiom with", username, password)
-        const user = await register({username, password});
+        console.log("Registratiom with", username, mail, password)
+        const user = await register({username, mail, password});
         console.log("user", user);
         window.localStorage.setItem(
             'loggedMDSearchUser', JSON.stringify(user)
@@ -60,7 +62,14 @@ export function Login (props){
         const username = input.match(/[a-z\d]*/ig).join('');
         setUsername(username);
     }
+    const handleMailChange = (event) => {
+        const input = event.target.value;
+        setMail(input);
+    }
 
+    const toggleMode = (event) => {
+        setMode(!mode)
+    }
     
     return(
         <div id='modalLogin'>
@@ -71,7 +80,16 @@ export function Login (props){
                 <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
                 <form onSubmit={handleLogin}>
                     <div id='loginWrapper'>
-                        <div id='usernameWrapper'>
+                        {mode && <div id='usernameWrapper'>
+                            <TextField 
+                            type="text"
+                            value={mail}
+                            label="mail"
+                            name="Mail"
+                            onChange={handleMailChange}
+                            />
+                        </div>}
+                        <div id='mail'>
                             <TextField 
                             type="text"
                             value={username}
@@ -96,9 +114,14 @@ export function Login (props){
                             display: 'flex',
                             justifyContent: 'space-between'
                         }}
-                    >
+                    >   
+                        {mode ? 
+                        <Button variant="contained" color="primary" sx={{width: '114px'}} onClick={handleRegister}>{'register & login'}</Button>
+                        :
                         <Button variant="contained" color="primary" sx={{width: '114px'}} onClick={handleLogin}>login</Button>
-                        <Button color="secondary" sx={{width: '114px'}} onClick={handleRegister}>create account</Button>
+                        }
+                        
+                        <Button color="iconButton" sx={{width: '114px'}} onClick={toggleMode}>{mode ? 'login' : 'create account'}</Button>
                     </Box>
                 </form>
                 </Modal>

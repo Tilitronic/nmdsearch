@@ -82,8 +82,11 @@ export async function getUserSearchHistory(){
   const user = store.getState().user.user;
   if(user){
     const rawHistory = await getUserSearchHistoryRequest();
-    const history = rawHistory[0].words.reverse();
-    if (history){
+    let history = []
+    if(rawHistory.length>0){
+      history=rawHistory[0].words.reverse()
+    }
+    if (history.length>0){
         for (let element of history){
           store.dispatch(updateHistory(element));
         }

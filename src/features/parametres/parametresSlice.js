@@ -5,7 +5,7 @@ export const parametresSlice = createSlice({
 name: 'parametres',
 initialState: {
     urban: {
-        label: 'Urban dictionary',
+        label: 'Urban dic.',
         name: 'urban',
         key: nanoid(),
         checked: true 
@@ -14,7 +14,7 @@ initialState: {
         label: 'WordNet',
         name: 'wordnet',
         key: nanoid(),
-        checked: true,
+        checked: false,
     },
     wordnik: {
         label: 'Wordnik',
@@ -35,13 +35,13 @@ initialState: {
         checked: false,
     },
     meriamL: {
-        label: 'Meriam-Webster Learners',
+        label: "Meriam-Webster's Learners dic.",
         name: 'meriamL',
         key: nanoid(),
-        checked: false 
+        checked: true 
     },
     meriamC: {
-        label: 'Meriam-Webster Collegiate',
+        label: "Meriam-Webster's Collegiate dic.",
         name: 'meriamC',
         key: nanoid(),
         checked: false 

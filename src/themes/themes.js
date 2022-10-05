@@ -193,6 +193,12 @@ export const mainTheme = createTheme({
           color: electricYellow,
           fontSize: '0.8rem'
         },
+        parametres: {
+          backgroundColor: '#0000',
+          color: babyPowder,
+          fontSize: '0.7rem',
+          lineHeight: '0.7rem',
+        },
 
       }
 })

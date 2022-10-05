@@ -2,6 +2,8 @@ import "./modalStyles.css";
 import { useEffect } from "react";
 import ReactPortal from "../ReactPortal.js";
 
+import {Checkbox, Box, FormGroup, FormControlLabel, Paper, Button, Typography} from '@mui/material';
+
 function Modal({ children, isOpen, handleClose }) {
     useEffect(() => {
       const closeOnEscapeKey = e => e.key === "Escape" ? handleClose() : null;
@@ -16,9 +18,9 @@ function Modal({ children, isOpen, handleClose }) {
     return (
         <ReactPortal wrapperId="react-portal-modal-container">
             <div className="modal">
-                <button onClick={handleClose} className="close-btn">
+                <Button variant="contained" onClick={handleClose} className="close-btn">
                     Close
-                </button>
+                </Button>
                 <div className="modal-content">{children}</div>
             </div>
         </ReactPortal>
