@@ -1,8 +1,8 @@
 .sourcesFormGroup {
   display: flex;
   flex-wrap: wrap;
-  min-width: 290px;
-  max-width: fit-content;
+  min-width: 500px;
+  max-width: 750px;
   height: 50px;
 }
 
