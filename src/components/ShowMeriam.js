@@ -192,17 +192,23 @@ function processText(rawText, type='1'){
     if (type==='1'){ 
         text0=rawText.replaceAll('{it}', '(<i>')
         text0=text0.replaceAll('{/it}', '</i>)')
+        text0=text0.replaceAll('{bc}{sx|', '<b>')
+        text0=text0.replaceAll(/\|(.|\n)*?}/ig, '</b>')
+
     }
     else if (type==='2'){
         text0=rawText.replaceAll('{it}', '<i>')
         text0=text0.replaceAll('{/it}', '</i>')
+        text0=text0.replaceAll('{bc}{sx|', '<b>')
+        text0=text0.replaceAll('||}', '</b>')
     }
      
-
+    console.log("text0", text0);
     const text1=text0
     const regexForStrip = /{(.|\n)*?}/ig
     const text2 = text1.replaceAll(regexForStrip, '')
     const result = text2
+    console.log("processText", result);
     return result
 }
 
