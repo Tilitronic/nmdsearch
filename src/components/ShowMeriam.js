@@ -117,7 +117,7 @@ function LearnersDefs({data, pos}){
             )})
         return(
             <div key={'mwdef2_'+index}>
-                {offensive &&  parse('<p><i>Offencive</i></p>')}
+                {offensive &&  <Box className='offensive' sx={{margin: 0}}>{parse("<p className='offensive'><i>Offencive</i></p>")}</Box>}
                 <Box
                     sx={{
                         paddingBottom: '7px',
@@ -271,7 +271,7 @@ function DetailedDefs({data, pos, filter=true}){
             )})
         return(
             <div key={'mwdef2_'+index}>
-                {offensive &&  parse('<p><i>Offencive</i></p>')}
+                {offensive &&  parse("<p className='offensive'><i>Offencive</i></p>")}
                 <Box
                     sx={{
                         paddingBottom: '7px',
