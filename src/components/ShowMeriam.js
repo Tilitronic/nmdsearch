@@ -212,7 +212,7 @@ function processText(rawText, type='1'){
     return result
 }
 
-function DetailedDefs({data, pos, filter=true}){
+function DetailedDefs({data, pos, filter=true, counter0}){
     const query = useSelector((state)=>state.query.query)
     let counter1 = 0
     
@@ -233,7 +233,7 @@ function DetailedDefs({data, pos, filter=true}){
         if (!defAr.length){return}
         const defElements2 = defAr.map(el=>{
             counter2+=1;
-
+            let counter3 = 0;
             const text = processText(el.def)
             let example = null
             let examples = []
@@ -242,8 +242,9 @@ function DetailedDefs({data, pos, filter=true}){
                 else if (el.exp.length>0){
                 examples=el.exp.map((obj, index)=>{
                     const text=processText(obj.t, '2')
+                    counter3+=1
                     return(
-                        <Typography key={counter1+'_'+counter2} variant='defExamples'>{parse(text)}</Typography>
+                        <Typography key={pos+'_'+counter0+'_'+counter1+'_'+counter2+'_'+counter3} variant='defExamples'>{parse(text)}</Typography>
                     )
                 })
             }
@@ -346,14 +347,15 @@ function ShowLearners(){
     console.log("sortedData", sortedData);
 
 
-
+    let counter0 = 0
     const elementsAr = Object.keys(sortedData).map((key, index)=>{
         if (sortedData[key].length===0){return}
+        counter0+=1
         return (
             <div>
                 {/* <LearnersDefs className={'mw_'+key} key={'shortDefWrapper'+index} data={sortedData[key]} pos={key}/>
                 <Typography>??????</Typography> */}
-                <DetailedDefs className={'mw_'+key} key={'shortDefWrapper'+index} data={sortedData[key]} pos={key}/>
+                <DetailedDefs className={'mw_'+key} key={'shortDefWrapper'+index} data={sortedData[key]} pos={key} counter0={'L'+counter0}/>
 
             </div>
         )
@@ -381,12 +383,13 @@ function ShowCollegiate(){
     console.log("sortedData", sortedData);
 
 
-
+    let counter0 = 0
     const elementsAr = Object.keys(sortedData).map((key, index)=>{
         if (sortedData[key].length===0){return}
+        counter0+=1
         return (
             <div>
-                <DetailedDefs className={'mw_'+key} key={'shortDefWrapper'+index} data={sortedData[key]} pos={key} filter={true}/>
+                <DetailedDefs className={'mw_'+key} key={'shortDefWrapper'+index} data={sortedData[key]} pos={key} filter={true} counter0={'C'+counter0}/>
             </div>
         )
     })
