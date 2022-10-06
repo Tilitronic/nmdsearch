@@ -386,7 +386,7 @@ function ShowCollegiate(){
         if (sortedData[key].length===0){return}
         return (
             <div>
-                <DetailedDefs className={'mw_'+key} key={'shortDefWrapper'+index} data={sortedData[key]} pos={key} filter={false}/>
+                <DetailedDefs className={'mw_'+key} key={'shortDefWrapper'+index} data={sortedData[key]} pos={key} filter={true}/>
             </div>
         )
     })
