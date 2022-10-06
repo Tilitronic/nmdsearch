@@ -23,20 +23,35 @@ export function ShowUrbanDictDef () {
   
       const text1 = obj.definition.match(/\[.*?\]/g); 
       if(text1){
-        const text2 = obj.definition.match(/(?<=\[).+?(?=\])/g);
-        // console.log("obj.definition", obj.definition);
-        // console.log("text1", text1);
-        // console.log("text2", text2);
+        // const text2 = obj.definition.match(/(?<=\[).+?(?=\])/g);
+        let text2 = []
+        for (let el of text1){
+          const word0 = el
+          const word1 = word0.replaceAll('[', '')
+          const word2 = word1.replaceAll(']', '')
+          text2.push(word2)
+        }
+        console.log("obj.definition", obj.definition);
+        console.log("text1", text1);
+        console.log("text2", text2);
+        // console.log("text2t", text2t);
         text1.forEach((element)=>definition=definition.replace(element, `<a href="${url+text2[text1.indexOf(element)]}" target="_blank" rel="noreferrer noopener">${text2[text1.indexOf(element)]}</a>`));
         definition=definition.replaceAll('\n', '<br/>');
       }
   
       const text3 = obj.example.match(/\[.*?\]/g); 
       if(text3){
-        const text4 = obj.example.match(/(?<=\[).+?(?=\])/g);
-        // console.log("obj.example", obj.example);
-        // console.log("text3", text3);
-        // console.log("text4", text4);
+        // const text4 = obj.example.match(/(?<=\[).+?(?=\])/g);
+        let text4=[]
+        for (let el of text3){
+          const word0 = el
+          const word1 = word0.replaceAll('[', '')
+          const word2 = word1.replaceAll(']', '')
+          text4.push(word2)
+        }
+        console.log("obj.example", obj.example);
+        console.log("text3", text3);
+        console.log("text4", text4);
         text3.forEach((element)=>example=example.replace(element, `<a href="${url+text4[text3.indexOf(element)]}" target="_blank" rel="noreferrer noopener">${text4[text3.indexOf(element)]}</a>`));
         example=example.replaceAll('\n', '<br/>');
       }
