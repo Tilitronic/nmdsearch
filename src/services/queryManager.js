@@ -9,6 +9,7 @@ import { getWordNetData } from "./wordnet";
 import {getWordnikData} from "./wordnik";
 import {getBabelNetDef} from "./babelNet.js"
 import {getMeriamWebsterCollegiate, getMeriamWebsterLearners} from "./meriamWebster"
+import {getOxfordDef} from './oxford.js'
 
 function processData(data, sourceName){
     if (data){
@@ -62,7 +63,7 @@ export function makeRequests(query){
             .then((data)=>store.dispatch(updateDict({dict: element.name, ...data})));
         }
         if(element.name==='oxford'){
-            getDictData(query)
+            getOxfordDef(query)
             .then((data)=>processData(data, element.name))
             .then((data)=>store.dispatch(updateDict({dict: element.name, ...data})));
         }

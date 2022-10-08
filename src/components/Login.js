@@ -8,15 +8,42 @@ import {getUserSearchHistory} from '../services/dbServices.js'
 import { TextField, Button, Box } from '@mui/material';
 import Modal from './Modal/Modal.js';
 
+function processInput(input, label='none'){
+    let result = input
+    switch(label){
+        case 'username':
+            result = input.match(/[a-z\d]*/ig).join('');
+            break
+        case 'paccword':
+            break
+        case 'mail':
+            break
+        default:
+            break
+    }
+    return result
+}
+
 export function Login (props){
     const [isOpen, setIsOpen] = useState(false);
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [mail, setMail] = useState('');
     const [mode, setMode] = useState(false);
-    // const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);
 
     const dispatch = useDispatch()
+
+    const useField = (type, label, name)=>{
+        const [value, setValue] = useState('');
+        const onChange = (event)=>{
+            const input = event.target.value;
+            const processedInput = processInput(input, label)
+            setValue(processedInput)
+        }
+        name = name ? name : label
+        return{type, label, name, value, onChange}
+    }
+    const username = useField('text', 'username')
+    const mail = useField('text', 'mail')
+    const password = useField('password', 'password')
 
     const handleLogin = async (event) =>{
         event.preventDefault();
@@ -30,10 +57,11 @@ export function Login (props){
             'loggedMDSearchUser', JSON.stringify(user)
             );
         if (user){
-            // setUser(userData);
-            setUsername('');
-            setPassword('');
-            dispatch(update(user)); //check without brakes
+
+            mail.setValue('')
+            password.setValue('')
+            username.setValue('')
+            dispatch(update(user)); 
             getUserSearchHistory();
         }
 
@@ -48,24 +76,15 @@ export function Login (props){
             'loggedMDSearchUser', JSON.stringify(user)
             );
         if (user){
-            // setUser(userData);
-            setUsername('');
-            setPassword('');
-            dispatch(update(user)); //check without brakes
+            mail.setValue('')
+            password.setValue('')
+            username.setValue('')
+            dispatch(update(user)); 
             getUserSearchHistory();
         }
 
     }
 
-    const handleUsernameChange = (event) => {
-        const input = event.target.value;
-        const username = input.match(/[a-z\d]*/ig).join('');
-        setUsername(username);
-    }
-    const handleMailChange = (event) => {
-        const input = event.target.value;
-        setMail(input);
-    }
 
     const toggleMode = (event) => {
         setMode(!mode)
@@ -80,32 +99,15 @@ export function Login (props){
                 <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
                 <form onSubmit={handleLogin}>
                     <div id='loginWrapper'>
-                        {mode && <div id='usernameWrapper'>
-                            <TextField 
-                            type="text"
-                            value={mail}
-                            label="mail"
-                            name="Mail"
-                            onChange={handleMailChange}
-                            />
+                        {mode && 
+                        <div id='usernameWrapper'>
+                            <TextField {...mail} />
                         </div>}
                         <div id='mail'>
-                            <TextField 
-                            type="text"
-                            value={username}
-                            label="username"
-                            name="Username"
-                            onChange={handleUsernameChange}
-                            />
+                            <TextField {...username} />
                         </div>
                         <div id='passwordWrapper'>
-                            <TextField 
-                            type="password"
-                            label="password"
-                            value={password}
-                            name="Password"
-                            onChange={({ target }) => setPassword(target.value)}
-                            />
+                            <TextField {...password} />
                         </div>
                     </div>
                     <Box 
@@ -121,7 +123,7 @@ export function Login (props){
                         <Button variant="contained" color="primary" sx={{width: '114px'}} onClick={handleLogin}>login</Button>
                         }
                         
-                        <Button color="iconButton" sx={{width: '114px'}} onClick={toggleMode}>{mode ? 'login' : 'create account'}</Button>
+                        <Button color="iconButton" sx={{width: '114px'}} onClick={toggleMode}>{mode ? 'I have an account' : 'create account'}</Button>
                     </Box>
                 </form>
                 </Modal>

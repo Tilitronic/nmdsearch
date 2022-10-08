@@ -46,6 +46,12 @@ initialState: {
         key: nanoid(),
         checked: false 
     },
+    //     oxford: {
+    //     label: 'Oxford dic.',
+    //     name: 'oxford',
+    //     key: nanoid(),
+    //     checked: false 
+    // },
     // wiktionary: {
     //     label: 'Wiktionary',
     //     name: 'wiktionary',
@@ -58,12 +64,7 @@ initialState: {
     //     key: nanoid(),
     //     checked: false 
     // },
-    // oxford: {
-    //     label: 'Oxford dictionary',
-    //     name: 'oxford',
-    //     key: nanoid(),
-    //     checked: false 
-    // },
+
 
 },
 reducers: {
