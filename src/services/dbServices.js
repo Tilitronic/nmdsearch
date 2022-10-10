@@ -4,9 +4,10 @@ import { useDispatch } from 'react-redux';
 import { update, remove, updateHistory} from '../features/user/userSlice.js'
 
 
+const localhost = process.env.REACT_APP_LOCALHOST;
+const backend = process.env.REACT_APP_BACKEND;
 
-
-const url= process.env.REACT_APP_LOCALHOST ? process.env.REACT_APP_LOCALHOST : 'https://md-search.herokuapp.com/';
+const url= localhost ? localhost : backend;
 const urlWords = url+'api/words';
 const urlHistory = url+'api/users/history';
 

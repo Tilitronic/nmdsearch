@@ -5,9 +5,7 @@ import { update, remove} from '../../features/user/userSlice.js';
 
 
 //functions
-import {getBabelNetDef} from '../../services/babelNet.js';
-import {getDatamuseSug} from '../../services/datamuse.js';
-import {getWordNetData} from '../../services/wordnet.js';
+
 
 // react elements
 import {ShowNotes} from '../../components/Shownotes.js';

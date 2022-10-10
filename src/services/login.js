@@ -1,9 +1,14 @@
 import axios from 'axios'
 
+const localhost = process.env.REACT_APP_LOCALHOST;
+const backend = process.env.REACT_APP_BACKEND;
+
 const loginApi = 'api/login'
 const registerApi = 'api/users'
-const loginUrl= process.env.REACT_APP_LOCALHOST ? process.env.REACT_APP_LOCALHOST+loginApi : 'https://md-search.herokuapp.com/'+loginApi;
-const registerUrl= process.env.REACT_APP_LOCALHOST ? process.env.REACT_APP_LOCALHOST+registerApi : 'https://md-search.herokuapp.com/'+registerApi;
+
+
+const loginUrl= localhost ? localhost+loginApi : backend+loginApi;
+const registerUrl= localhost ? localhost+registerApi : backend+registerApi;
 
 export async function login(credentials){
     try{

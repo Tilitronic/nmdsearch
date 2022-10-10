@@ -11,43 +11,11 @@ import {Typography, Accordion, AccordionDetails, AccordionSummary, Box} from '@m
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
-
-function TextAccordion({children, name, color='primary'}){
-
-    return(
-        <Accordion
-        sx={{
-            borderLeft: 3,
-            borderColor: 'synBBC'
-        }}
-    >
-        <AccordionSummary
-            expandIcon={<ExpandMoreIcon color={color} fontSize='10px'/>}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-        >
-            <Typography 
-                variant='synonimsHead'
-            >
-                {name}
-            </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-            <div>
-                {children}
-            </div>             
-        </AccordionDetails>
-    </Accordion>
-    )
-}
-
 export function ShowWordnet(){
     const data = useSelector((state)=>state.dicts.wordnet)
     console.log("redux state wordnet", data);
 
-    if (!data?.list){
-        return 
-    }
+    if (!data?.list){return}
     const dictDataAr = data.list.map((obj)=>{
         const partOfSpeech = obj.pos
 

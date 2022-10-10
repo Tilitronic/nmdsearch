@@ -1,15 +1,38 @@
+import axios from "axios";
 
 // redux state
 import store from "../store";
 import { updateDict } from "../features/sources/dictsSlice";
 
+const localhost = process.env.REACT_APP_LOCALHOST;
+const backend = process.env.REACT_APP_BACKEND;
+
+const url = localhost ? localhost+'dictApi' : backend+'dictApi';
+
+async function getDictApiData(word, apiName){
+    try{
+        const response = await axios({
+            method: 'post',
+            url: url,
+            params:{
+                word: word,
+                api: apiName
+            }
+        });
+        console.log(`The ${apiName} data from "${word}" response is: `, response);
+
+        return response.data
+      }
+      catch(error){
+        console.log(`Request "${word}" to ${apiName} failed:`, error)
+      }
+}
+
 //sources services
 import { getUrbanDictDef } from "./urbanDict";
-import { getWordNetData } from "./wordnet";
 import {getWordnikData} from "./wordnik";
-import {getBabelNetDef} from "./babelNet.js"
-import {getMeriamWebsterCollegiate, getMeriamWebsterLearners} from "./meriamWebster"
-import {getOxfordDef} from './oxford.js'
+import {getBabelNetDef} from "./babelNet.js";
+import {getMeriamWebsterCollegiate, getMeriamWebsterLearners} from "./meriamWebster";
 
 function processData(data, sourceName){
     if (data){
@@ -48,7 +71,9 @@ export function makeRequests(query){
             .then((data)=>store.dispatch(updateDict({dict: element.name, ...data})));
         }
         if(element.name==='wordnet'){
-            getWordNetData(query)
+            // getWordNetData(query)
+            console.log('wordnet working!')
+            getDictApiData(query, element.name)
             .then((data)=>processData(data, element.name))
             .then((data)=>store.dispatch(updateDict({dict: element.name, ...data})));
         }
@@ -63,7 +88,8 @@ export function makeRequests(query){
             .then((data)=>store.dispatch(updateDict({dict: element.name, ...data})));
         }
         if(element.name==='oxford'){
-            getOxfordDef(query)
+            // getOxfordDef(query)
+            getDictApiData(query, element.name)
             .then((data)=>processData(data, element.name))
             .then((data)=>store.dispatch(updateDict({dict: element.name, ...data})));
         }
