@@ -1,0 +1,1 @@
+export { ShowWordnet } from './ShowWordnet.jsx';

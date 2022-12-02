@@ -1,0 +1,1 @@
+export { ShowWordnik } from './ShowWordnik.jsx';

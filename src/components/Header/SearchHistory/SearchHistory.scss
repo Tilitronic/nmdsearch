@@ -1,0 +1,31 @@
+.searchHistoryWrapper{
+    display: flex;
+    flex-direction: row;
+}
+.lastSearchWrapper{
+    display: flex;
+    flex-direction: column;
+}
+.lastSearchWrapper{
+    font-size: 12px;
+}
+.LSbutton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // margin-left: 10px;
+    height: 36.6px;
+}
+.LSbutton svg{
+    height: 100%;
+    width: 70%;
+}
+
+.SrHs input{
+    position: relative;
+}
+
+.SrHshistoryWrapper{
+    position: absolute;
+}
+

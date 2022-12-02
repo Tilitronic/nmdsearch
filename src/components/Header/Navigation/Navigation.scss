@@ -1,0 +1,16 @@
+@use '../../../theme.scss';
+
+.navigationWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.HDheader.navButton{
+  min-width: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  height: 36.6px;
+}
+

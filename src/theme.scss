@@ -1,0 +1,192 @@
+// HEADER
+$header-height: 70px;
+
+// FONTS
+
+
+// electricYellow = '#ffff33'
+$primary-color: #ffff33;
+
+
+// magenda = '#ff33ff'
+$secondary-color: #ff33ff;
+
+// babyPowder = '#fefefa'
+$white: #fefefa;
+
+//  black = '#010101'
+$background-color1: #010101;
+
+// grey = '#1b1b1b'
+$background-color2: #1b1b1b;
+
+// acidDark COLORS
+$color1: #ffff33;
+$color2: #ff33ff;
+$color3: rgb(0, 128, 38);
+$color4: rgb(51, 255, 255);
+$bckCl1: #010101;
+$bckCl2: #1b1b1b;
+$textClr: #fefefa;
+
+@mixin checkboxes ($theme-name, $markedColor, $unmarkedColor) {
+    .#{$theme-name} {
+    .container input:checked ~ .checkmark {
+        border-color: $markedColor;
+      }
+    .checkmark{
+        border-color: $unmarkedColor;
+    }
+    .container .checkmark:after{
+        border-color: $markedColor;
+    }
+}
+}
+
+@mixin text ($theme-name, $textClr){
+    .#{$theme-name} p{
+        color: $textClr
+    }
+    .#{$theme-name} ul{
+        color: $textClr
+    }
+    .#{$theme-name} h1{
+        color: $textClr
+    }
+    .#{$theme-name} h2{
+        color: $textClr
+    }
+    .#{$theme-name} h3{
+        color: $textClr
+    }
+}
+
+@mixin background ($theme-name, $bckCl1, $bckCl2){
+    .SrPg.pageElementsWrapper.#{$theme-name}{
+        background-color: $bckCl1;
+    }
+    .AbPg.pageElementsWrapper.#{$theme-name}{
+        background-color: $bckCl1;
+    }
+    .AbPg.TOC.drawer.#{$theme-name}{
+        background-color: $bckCl2;
+    }
+    .HDheaderWraper.#{$theme-name}{
+        background-color: $bckCl1;
+    }
+    .parametersDropdownMenu.#{$theme-name}{
+        background-color: $bckCl2;
+    }
+    .dropdownWords.#{$theme-name}{
+        background-color: $bckCl2;
+    }
+    .inputField.#{$theme-name}{
+        background-color: $bckCl1;
+    }
+};
+
+@mixin scrollbars ($theme-name, $bckCl2,  $bckCl1){
+    // Firefox scrollbar styling
+    .#{$theme-name} * {
+        scrollbar-color: $bckCl2  $bckCl1;
+        scrollbar-width: thin;
+    }
+    
+    // Chrome scrollbar styling
+    .#{$theme-name} *::-webkit-scrollbar {
+        width: 10px;               /* width of the entire scrollbar */
+    }
+    
+    .#{$theme-name} *::-webkit-scrollbar-track {
+        background: $bckCl1;        /* color of the tracking area */
+    }
+    
+    .#{$theme-name} *::-webkit-scrollbar-thumb {
+        background-color: $bckCl2;    /* color of the scroll thumb */
+        border-radius: 0x;       /* roundness of the scroll thumb */
+        // border: 1px solid rgb(10, 10, 10);  /* creates padding around scroll thumb */
+    }
+}
+
+@mixin truUnit ($className, $theme-name, $color){
+    .#{$className}.#{$theme-name}{
+        color: $color;
+    }
+    .#{$className}.#{$theme-name}.expandButton > svg{
+        color: $color;
+    }
+    .#{$className}.#{$theme-name}{
+        color: $color;
+    }
+    .#{$className}.#{$theme-name}.content{
+        border-color: $color;
+    }
+    .#{$className}.#{$theme-name}.header{
+        border-color: $color;
+    }
+}
+
+@mixin themable ($theme-name, $color1, $color2, $color3, $color4, $bckCl1, $bckCl2, $textClr)
+{
+
+        //CHECKBOXES
+
+        @include checkboxes ($theme-name, $color2, $color1);
+        //BUTTONS
+        button.#{$theme-name}{
+            background-color: $color2;
+        }
+        .TRU.expandButton.#{$theme-name} svg{
+            color: $textClr;
+        }
+        .audioButton.#{$theme-name} svg{
+            color: $textClr;
+        }
+        button.transparent.#{$theme-name}{
+            background-color: rgba(0, 128, 0, 0);
+        }
+        button.transparent.#{$theme-name} svg{
+            color: $color2;
+        }
+
+        //TEXT
+        @include text ($theme-name, $textClr);
+
+        //BACKGROUND
+        @include background ($theme-name, $bckCl1, $bckCl2);
+
+        
+        //BORDERS
+        .DEbar.#{$theme-name}{
+            border-color: $textClr;
+        }
+        .HDheaderElementsWrapper.#{$theme-name}{
+            border-bottom-color: $textClr;
+        }
+        .inputField.#{$theme-name}{
+            border-color: $color2;
+        }
+        .inputField.#{$theme-name}:focus{
+            border-color: $textClr;
+        }
+
+        //SCROLLBARS
+        @include scrollbars ($theme-name, $bckCl2,  $bckCl1);
+
+        // RESULTS
+        .expandButton.#{$theme-name} > svg{
+            color: $textClr;
+        }
+        @include truUnit ('defHead', $theme-name, $color2);
+        .defBody.#{$theme-name}{
+            padding-left: 5px;
+        }
+
+        @include truUnit ('defExamples', $theme-name, $color4);
+        @include truUnit ('defSynonyms', $theme-name, $color1);
+        @include truUnit ('standartTRU2', $theme-name, $textClr);
+
+
+
+}
+    

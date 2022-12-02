@@ -1,69 +1,60 @@
-import {
-  BrowserRouter as Router,
-  Routes, Route, Link
-} from "react-router-dom"
-import { useState, useRef, useEffect } from 'react';
-import styles from './index.scss'
+import { Routes, Route } from 'react-router-dom';
+import { useRef } from 'react';
+import './index.scss';
 
 //redux store
-import { useSelector, useDispatch } from 'react-redux';
-import store from './store.js';
-import { updateQuery, removeQuery, updateQueryHistory } from './features/query/querySlice.js'
-import { update, updateHistory } from "./features/user/userSlice.js";
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 //react components
-import {Header} from './components/Header';
-import {Home} from './components/Home';
-import { About } from './components/About';
+import { Header } from './components/Header';
+import { AboutPage }  from './fetures/AboutPage';
+import { SearchPage } from './fetures/SearchPage';
 
-//material ui
-import { Container, ThemeProvider, Box, CssBaseline } from '@mui/material';
-import { display } from "@mui/system";
-import {mainTheme} from './themes/themes.js'
+// import { RootState } from './store/storeTypes';
 
-
+import { toCamelCase } from './utils';
 
 
 
 function App() {
-  const shouldUseEffect=useRef(true);
-  const dispatch=useDispatch();
+  const themeName = useSelector((state) => state.parameters.ui.theme);
 
-  useEffect(()=>{
-    if (shouldUseEffect.current){
-      shouldUseEffect.current=false;
+  // useEffect(() => {
+  //   if (shouldUseEffect.current){
+  //     shouldUseEffect.current=false;
 
-      //update user redux state
-      const loggedUserJSON = window.localStorage.getItem('loggedMDSearchUser');
-      if (loggedUserJSON) {
-        const user = JSON.parse(loggedUserJSON)
-        dispatch((update(user)))
-      } 
+  //update user redux state
+  //     const loggedUserJSON = window.localStorage.getItem('loggedMDSearchUser');
+  //     if (loggedUserJSON) {
+  //       const user = JSON.parse(loggedUserJSON);
+  //       dispatch((update(user)));
+  //     }
 
-      //update query redux state
-      const queryJSON = window.localStorage.getItem('queryMDSearch');
-      if (queryJSON) {
-        const query = JSON.parse(queryJSON)
-        dispatch((updateQuery(query)))
-      } 
+  //     //update query redux state
+  //     const queryJSON = window.localStorage.getItem('queryMDSearch');
+  //     if (queryJSON) {
+  //       const query = JSON.parse(queryJSON);
+  //       dispatch((updateQuery(query)));
+  //     }
 
-      //update query history redux state
-      const queryHistoryJSON = window.localStorage.getItem('queryHistoryMDSearch');
-      if (queryHistoryJSON) {
-        const queryHistory = JSON.parse(queryHistoryJSON).reverse();
-        for (let element of queryHistory){
-          if(store.getState().user.user){
-            dispatch(updateHistory(element))
-          }
-          else{
-            // console.log("element", element);
-            dispatch(updateQueryHistory(element));
-          }  
-        } 
-      }
-     
-    }
-}, [])
+  //     //update query history redux state
+  //     const queryHistoryJSON = window.localStorage.getItem('queryHistoryMDSearch');
+  //     if (queryHistoryJSON) {
+  //       const queryHistory = JSON.parse(queryHistoryJSON).reverse();
+  //       for (let element of queryHistory){
+  //         if(store.getState().user.user){
+  //           dispatch(updateHistory(element));
+  //         }
+  //         else{
+  //           // console.log("element", element);
+  //           dispatch(updateQueryHistory(element));
+  //         }
+  //       }
+  //     }
+
+  //   }
+  // }, []);
 
   return (
     // <Container
@@ -71,22 +62,18 @@ function App() {
     // //   maxWidth: false
     // // }}
     // >
-    <ThemeProvider theme={mainTheme}>
-      <CssBaseline />
-      <Box >
-        <div>
-          <Header/>
-          
-          <Routes>
-            <Route path='/' element={<Home/>}/>
-            <Route path='/about' element={<About/>}/>
-          </Routes>
-        </div>
-      </Box> 
-    </ThemeProvider>    
-    // </Container>
- 
-    
+    <div>
+      <Header/>
+      <main>
+        <Routes>
+          <Route path='/' element={<SearchPage className={toCamelCase(themeName)}/>}/>
+          <Route path='/about' element={<AboutPage className={toCamelCase(themeName)}/>}/>
+        </Routes>
+      </main>
+    </div>
+  // </Container>
+
+
   );
 }
 

@@ -1,0 +1,18 @@
+.wordnik.pronouncAndAudioWrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+.wordnik.audioElements{
+    display: flex;
+    flex-direction: row;
+}
+
+.wordnik.audioButton:hover{
+    cursor: pointer;
+}
+.wordnik.audioButton{
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 0);
+    border: 0;
+}

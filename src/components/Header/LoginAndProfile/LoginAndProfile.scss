@@ -1,0 +1,16 @@
+@use '../../../theme.scss';
+
+.loginHeaderButton{
+    border: 0;
+    min-width: 65px;
+    height: 36.6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    background-color: theme.$secondary-color;
+}
+
+button.PrFl{
+    height: 36.6px;
+}

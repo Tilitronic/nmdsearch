@@ -1,0 +1,24 @@
+.TRU.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    padding: 0;
+}
+
+.TRU.expandButton :hover{
+    cursor: pointer;
+}
+
+.expandableElement.TRU.type2 {
+    margin-top: 8px;
+}
+
+* > .expandableElement.TRU.type1 {
+    margin-top: 12px;
+}
+* > :first-child.expandableElement.TRU.type1 {
+    margin-top: 0;
+}
+// .expandableElement.type2{
+//     border-left: solid 2px pink;
+// }

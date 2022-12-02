@@ -1,0 +1,26 @@
+@use '../../../theme.scss';
+
+$DEbar-height: 20px;
+.DE.elementsWrapper{
+    width: fit-content;
+    min-width: 210px;
+    max-width: 700px;
+    max-height: calc(100vh - theme.$header-height);
+}
+
+.DEbar{
+    height: $DEbar-height;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    overflow-x: hidden;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.DEbar::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+
+.DEcontent{
+    overflow-y: auto;
+
+    max-height: calc(100vh - theme.$header-height - $DEbar-height);
+}

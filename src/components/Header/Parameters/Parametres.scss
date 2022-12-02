@@ -1,0 +1,57 @@
+.UIparamsWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.UIparams{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36.6px;
+    width: 36.6px;
+}
+.UIparams svg{
+    height: 100%;
+    width: 100%;
+}
+.parametersDropdownMenu{
+    position: absolute;
+    background-color: rgb(192, 133, 133);
+    min-height: 100px;
+    min-width: 150px;
+    width: 250px;
+    margin-top: 189px;
+    // transform: translateY(68%);
+    flex-direction: column;
+    padding: 10px;
+}
+
+.parametersDropdownMenu>*{
+    margin-bottom: 15px;
+}
+.parametersDropdownMenu>:last-child{
+    margin-bottom: 0;
+}
+
+.PrsubMenuItems{
+ display: flex;
+ flex-direction: row;
+}
+.PrsubMenuItems *{
+    display: flex;
+    flex-direction: row;
+}
+
+.PrsubMenuItems label input{
+    margin: 0;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+.PrsubMenuItems label p{
+    margin-right: 5px;
+}

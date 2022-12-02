@@ -1,0 +1,75 @@
+@use'../../../theme.scss';
+
+.prms.checkboxesWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  min-width: 510px;
+  max-width: 750px;
+  height: 50px;
+}
+
+/* Customize the label (the container) */
+.container {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  height: 15px;
+  width: 15px;
+  margin-right: 5px;
+  // background-color: #eee;
+  border: 2px solid black;
+}
+
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  border: 2px solid black;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .checkmark:after {
+  top: 2px;
+  width: 7px;
+  height: 8px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

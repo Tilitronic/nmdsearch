@@ -1,0 +1,77 @@
+@use '../../theme.scss';
+
+.HDheaderWraper{
+    position: sticky;
+    top: 0;
+    height: theme.$header-height;
+    border-bottom: 1px;
+    display: flex;
+    align-items: center;
+    // margin: -70px;
+    width: 100vw;
+}
+
+.HDheaderElementsWrapper{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid black;
+}
+
+.history{
+    /* background-color: rgb(43, 226, 195);    */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@mixin headerInput {
+    outline: none;
+    min-width: 150px;
+    height: calc(36.6px - 4px);
+    border-radius: 0;
+    padding: 0;
+    padding-left: 5px;
+    background-color: pink;
+    border: solid 2px;
+    border-color: aqua;
+    color: aliceblue;
+}
+@mixin headerInputactive {
+    border-color: yellow
+}
+.inputField{
+    @include headerInput;
+}
+
+.inputField:focus{
+    @include headerInputactive;
+}
+
+
+.dropdownWords{
+    position: absolute;
+    background-color: rgb(170, 11, 162);
+    width: 159px;
+}
+.dropdownItem{
+    margin-left: 0px;
+    padding: 5px;
+    // border: solid 2px white;
+    // border: 1px solid black;
+
+    border-top: 0;
+}
+.dropdownItem.active{
+    border: solid 2px white;
+}
+
+.dropdownItem:hover{
+    cursor: pointer;
+    background-color: gray;
+}
+
+

@@ -1,39 +1,119 @@
-.buy-container {
-  overflow-y: hidden;
-  width: 100vw;
-}
+@charset 'utf-8';
+@use './theme.scss';
 
-.MuiContainer-root {
+html {
+  height: 100%;
   width: 100%;
-  background-color: black;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  scroll-padding-top: theme.$header-height;
+}
+body {
+  min-height: 100%;
   padding: 0;
-
-}
-.css-1oqqzyl-MuiContainer-root{
-  padding-left: 0;
-  padding-right: 0;
+  margin: 0;
 }
 
-// Firefox scrollbar styling
-*{
-  scrollbar-color: rgb(27, 27, 27)  rgb(1, 1, 1);
-  scrollbar-width: thin;
+// ELEMENTS
+.pageElementsWrapper{
+  height: calc(100vh - theme.$header-height);
 }
 
-// Chrome scrollbar styling
-*::-webkit-scrollbar {
-  width: 10px;               /* width of the entire scrollbar */
+// FONTS
+@font-face {
+  font-family: 'CMUSansSerif';
+  src: url('../public/resources/fonts/CMU/cmu_sansserif_roman.woff');
+  font-style: normal;
+  font-weight: 100;
+}
+@font-face {
+  font-family: 'CMUSansSerif';
+  src: url('../public/resources/fonts/CMU/cmu_sansserif_bold.woff') format('woff');
+  font-style: normal;
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'CMUSansSerif';
+  src: url('../public/resources/fonts/CMU/cmu_sansserif_oblique.woff') format('woff');
+  font-style: oblique;
+}
+@font-face {
+  font-family: 'CMUSansSerifCondensed';
+  src: url('../public/resources/fonts/CMU/cmu_sansserif_demicondensed.woff') format('woff');
+
+}
+@font-face {
+  font-family: 'CMUSerif';
+  src: url('../public/resources/fonts/CMU/cmuserif_roman.woff') format('woff');
+
 }
 
-*::-webkit-scrollbar-track {
-  background: rgb(1, 1, 1);        /* color of the tracking area */
+button{
+  font-family: 'CMUSansSerif';
+}
+p{
+  font-family: 'CMUSansSerif';
+}
+div{
+  font-family: 'CMUSansSerif';
 }
 
-*::-webkit-scrollbar-thumb {
-  background-color: rgb(27, 27, 27);    /* color of the scroll thumb */
-  border-radius: 0x;       /* roundness of the scroll thumb */
-  // border: 1px solid rgb(10, 10, 10);  /* creates padding around scroll thumb */
+.serif p {
+  font-family: 'CMUSerif';
 }
+
+
+
+
+
+// HTML ELEMENTS
+
+p{
+  margin: 0;
+  padding: 0;
+}
+
+// buttons
+button{
+  border: 0;
+  text-transform: uppercase;
+  font-family: 'CMUSansSerifCondensed';
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+
+// SCROLLBAR
+
+body{
+  overflow: hidden;
+}
+
+
+
+//SELECTION DISABLE
+.noSelection{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+//THEMES
+$color1: #ffff33;
+$color2: #ff33ff;
+$color3: rgb(0, 128, 38);
+$color4: rgb(51, 255, 255);
+$bckCl1: #010101;
+$bckCl2: #1b1b1b;
+$textClr: #fefefa;
+@include theme.themable('acidDark', $color1, $color2, $color3, $color4, $bckCl1, $bckCl2, $textClr);
+
+$CLcolor1: #464643;
+$CLcolor2: #30302f;
+$CLcolor3: rgb(45, 107, 64);
+$CLcolor4: rgb(35, 87, 87);
+$CLbckCl1: #a0a09e;
+$CLbckCl2: #757572;
+$CLtextClr: #010101;
+@include theme.themable('colorlessLight', $CLcolor1, $CLcolor2, $CLcolor3, $CLcolor4, $CLbckCl1, $CLbckCl2, $CLtextClr);

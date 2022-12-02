@@ -1,0 +1,1 @@
+export { ShowMeriamWebsterL, ShowMeriamWebsterC } from './ShowMeriamWebster';

@@ -1,0 +1,16 @@
+@use '../../theme.scss';
+.SrPg.pageElementsWrapper{
+    display: flex;
+    flex-direction: row;
+    max-height: calc(100vh - theme.$header-height);
+    max-width: 100vw;
+}
+
+// sources elements styling
+a{
+    color: inherit;
+}
+
+.defExamples.main {
+    margin-left: 10px;
+}

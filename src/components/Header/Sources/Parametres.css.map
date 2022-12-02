@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,AAAA,kBAAkB,CAAC;EACtB,OAAO,EAAE,IAAI;EACb,SAAS,EAAE,IAAI;EACf,SAAS,EAAE,KAAK;EAChB,SAAS,EAAE,KAAK;EAChB,MAAM,EAAE,IAAI;CACb",
+    "sources": [
+        "Parametres.scss"
+    ],
+    "names": [],
+    "file": "Parametres.css"
+}

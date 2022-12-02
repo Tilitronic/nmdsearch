@@ -1,1 +1,1 @@
-export * from './TextResultUnit';
+export { TextResultUnit } from './TextResultUnit';

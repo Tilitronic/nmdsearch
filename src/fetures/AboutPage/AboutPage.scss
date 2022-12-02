@@ -1,0 +1,32 @@
+@use '../../theme.scss';
+
+.pageElementsWrapper.AbPg{
+    display: flex;
+    flex-direction: row;
+    scroll-padding-top: 70px;
+}
+.drawer{
+    min-width: 250px;
+    max-width: 350px;
+    height: 100%;
+}
+.AbPg.navLink{
+    text-decoration: none;
+
+}
+.anchorDaddy{
+    // position: relative;
+}
+.anchorTarget{
+    // position: absolute;
+    // top: 70px;
+    // scroll-margin-top: -80px;
+}
+.AbPgdrawerTitle{
+    padding-left: 10px;
+}
+
+.content.AbPg{
+    overflow-y: auto;
+    padding-left: 50px;
+}
