@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { login, register } from '../../../api/login.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { update, remove } from '../../../store/user/userSlice.js';
+import { update } from '../../../store/user/userSlice.js';
 import { getUserSearchHistory } from '../../../api/dbServices.js';
 
 // material ui
-import { TextField, Button, Box } from '@mui/material';
 import { Modal } from '../../Modal';
 
 function processInput(input, label='none'){
@@ -38,6 +37,7 @@ const useField = (type, label, name) => {
 export function Login (props){
   const [isOpen, setIsOpen] = useState(false);
   const [mode, setMode] = useState(false);
+  const themeName = useSelector((state) => state.parameters.ui.themeCC);
 
   const dispatch = useDispatch();
 
@@ -74,6 +74,7 @@ export function Login (props){
     console.log('Registration with:', 'username: ', username.value, 'mail: ',mail.value, 'password: ',password.value);
     const user = await register({ username: username.value, mail: mail.value, password: password.value });
     console.log('user', user);
+
     // window.localStorage.setItem(
     //   'loggedMDSearchUser', JSON.stringify(user)
     // );
@@ -95,7 +96,7 @@ export function Login (props){
 
   return(
     <div id='modalLogin'>
-      <button className='loginHeaderButton' onClick={() => setIsOpen(true)}>
+      <button className={'loginHeaderButton '+themeName} onClick={() => setIsOpen(true)}>
                 Login
       </button>
 
