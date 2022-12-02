@@ -16,9 +16,9 @@ const technologiesText = `The web page is built with React library.
 Global state managing realized with React Redux and routing with 
 React Router libraries. User managing and some APIs functional are 
 realized with the backend written in Node.js. For storing user's 
-data the page is using Mongo database (free plane). Styling, 
-for now, is done with Material UI library. The frontend is hosted 
-for free on Netlify and backend — on Heroku. The code is available on my ${github}.`;
+data the page is using Mongo database (free plane). Styling ant theming is 
+done mostly with SCSS. The frontend is hosted for free on Netlify and 
+backend — on Heroku. The code is available on my ${github}.`;
 
 export const pageData = [
   {
