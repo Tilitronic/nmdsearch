@@ -135,7 +135,7 @@ export function SearchField  () {
           onChange={handleWordChange}
           onKeyDown={handleKeyPress}
         />
-        <button className={'SF goButton '+themeName}>go</button>
+        <button className={'SF goButton '+themeName} onClick={startSearch}>go</button>
       </div>
       <div className={'suggestionsWrapper dropdownWords SrFl '+themeName} ref={suggestionsWrapper}>
         {

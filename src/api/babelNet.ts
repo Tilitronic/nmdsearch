@@ -31,7 +31,7 @@ async function getBabelNetSynsets(id){
       //     'Accept-Encoding': 'gzip'
       // }}
     );
-    // console.log(`The BabelNet synset: `, response.data);
+    console.log(`The BabelNet synset ${id}: `, response.data);
     return response.data;
   }
   catch(error){

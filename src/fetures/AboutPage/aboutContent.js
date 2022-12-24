@@ -3,7 +3,8 @@ function makeALink(phrase, link){
   return `<a href='${link}' target='_blank' rel='noreferrer noopener'>${phrase}</a>`;
 }
 
-const introText = `The MDSearch page as a non-commercial project was created primarily to search for the meaning of 
+const introText = `The MDSearch page as a non-commercial learning project (so there 
+is no ad or good user experience here) was created primarily to search for the meaning of 
 an English word in several sources at once. When I watched cartoons or 
 read books in English and looked for definitions of unfamiliar words, 
 I often found myself having to look up the word in several places because 
