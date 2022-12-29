@@ -31,7 +31,7 @@ async function getDictApiData(word, apiName){
 //sources services
 import { getUrbanDictDef } from './urbanDict';
 import { getWordnikData } from './wordnik';
-import { getBabelNetDef } from './babelNet.js';
+import { getBabelNetDef } from './babelNet';
 import { getMeriamWebsterCollegiate, getMeriamWebsterLearners } from './meriamWebster';
 
 function processData(data, sourceName){

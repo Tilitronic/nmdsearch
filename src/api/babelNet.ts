@@ -3,11 +3,7 @@ import axios from 'axios';
 const key = process.env.REACT_APP_BABELNET_API_KEY;
 const lang = 'en';
 
-const params = {
-
-};
-let counter = 0;
-async function getBabelNetSenses(word){
+async function getBabelNetSenses(word: string){
   const url = `https://babelnet.io/v7/getSenses?lemma=${word}&searchLang=${lang}&key=${key}`;
   try{
     const response = await axios.get(url,
@@ -23,7 +19,7 @@ async function getBabelNetSenses(word){
   }
 }
 
-async function getBabelNetSynsets(id){
+async function getBabelNetSynsets(id: string){
   const url = `https://babelnet.io/v7/getSynset?id=${id}&key=${key}`;
   try{
     const response = await axios.get(url,
@@ -39,18 +35,19 @@ async function getBabelNetSynsets(id){
   }
 }
 
-export async function getBabelNetDef (word){
+export async function getBabelNetDef (word: string){
   let counter = 0;
   const num = 50;
   const rawSenses = await getBabelNetSenses(word);
   counter+=1;
   const ids = rawSenses.map(sense => sense.properties.synsetID.id);
-  const idsSet = new Set(ids);
-  const uniqueIds = [...idsSet];
-  let synsets = [];
+  const idsSet = new Set<string>(ids);
+  const uniqueIds = Array.from(idsSet);
+  console.log('uniqueIds', uniqueIds);
+  const synsets = [];
   console.log('ids', ids);
   console.log('uniqueIds', uniqueIds);
-  for (let id of uniqueIds.slice(0, num)){
+  for (const id of uniqueIds.slice(0, num)){
     const synset = await getBabelNetSynsets(id);
     counter+=1;
     if(synset){
@@ -58,7 +55,7 @@ export async function getBabelNetDef (word){
     }
   }
   const sortedByPosSynsets = { noun: [], verb: [], adj: [], adv: [], oth: [] };
-  for (let synset of synsets){
+  for (const synset of synsets){
     const pos = synset.senses[0].properties.pos;
     switch (pos) {
     case 'NOUN':
@@ -81,8 +78,8 @@ export async function getBabelNetDef (word){
     }
   }
   const sortedBySourceSynsets = { wordnet:[], wikipedia: [], wiktionary: [], wikidata: [], omegawiki: [] };
-  for (let synset of synsets){
-    for (let gloss of synset.glosses){
+  for (const synset of synsets){
+    for (const gloss of synset.glosses){
       const source = gloss.source;
       const obj = { ...gloss, pos: synset.senses[0].properties.pos };
       switch (source) {

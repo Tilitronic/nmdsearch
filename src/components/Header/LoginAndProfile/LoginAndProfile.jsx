@@ -1,6 +1,6 @@
 import styles from './LoginAndProfile.scss';
 
-import { Login } from './Login.jsx';
+import { LoginAndRegister } from './LoginAndRegister';
 import { useSelector } from 'react-redux';
 import { Profile } from './Profile.jsx';
 
@@ -9,7 +9,7 @@ export function LoginAndProfile () {
 
   return(
     <div id='LoginAndProfile'>
-      {user ? <Profile/> : <Login/>}
+      {user ? <Profile/> : <LoginAndRegister/>}
     </div>
   );
 }
