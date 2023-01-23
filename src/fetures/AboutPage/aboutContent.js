@@ -19,7 +19,7 @@ React Router libraries. User managing and some APIs functional are
 realized with the backend written in Node.js. For storing user's 
 data the page is using Mongo database (free plane). Styling ant theming is 
 done mostly with SCSS, icons are from Material UI. The frontend is hosted for free on Netlify and 
-backend — on Heroku. The code is available on my ${github}.`;
+backend — on Render. The code is available on my ${github}.`;
 
 export const pageData = [
   {
